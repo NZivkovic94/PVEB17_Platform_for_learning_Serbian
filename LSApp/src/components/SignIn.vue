@@ -33,8 +33,17 @@
 	</div>
 </template>
 
-<script>
-	export default {
+<script> //src="https://unpkg.com/axios/dist/axios.min.js" this link is broken we need another way to import axios
+
+
+//this should import axios if node_modules is library root
+import Vue from 'vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios, axios)
+
+export default {
 		name: "SignIn",
 		data () {
 			return {
@@ -45,6 +54,28 @@
 		},
 		methods: {
 			addUser: function(e){
+
+			    /*We are going to post to do laravel model using axios*/
+
+				/*!IMPORTANT We need to check if vue.js router's "/" is same as laravel router's "/"
+				(is root route the same?)
+
+				edit: it is not and adding full adress also dont work !!!
+
+				*/
+
+
+
+                Vue.axios.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/addUser', {
+                    name: this.newUser.name,
+                    last_Name: this.newUser.lastname,
+					password: this.newUser.password,
+					email_adress: this.newUser.email,
+					username: this.newUser.username,
+                })
+
+
+			    /* This output will stay for now */
 				this.users.push({
 					fullname: this.newUser.name + " " + this.newUser.lastname,
 					email: this.newUser.email,
