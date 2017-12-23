@@ -72,6 +72,7 @@
       <path value="$PROJECT_DIR$/laravel/vendor/jakub-onderka/php-console-highlighter" />
       <path value="$PROJECT_DIR$/laravel/vendor/jakub-onderka/php-console-color" />
       <path value="$PROJECT_DIR$/laravel/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/laravel/vendor/barryvdh/laravel-cors" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />

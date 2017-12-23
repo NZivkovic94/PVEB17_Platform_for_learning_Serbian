@@ -22,6 +22,10 @@
 			</form>
 		</div>
 
+		<button @click="test">
+			console.log data from laravel
+		</button>
+
 		<ul>
 			<li v-for = "user in users">
 				{{user.fullname}} {{user.username}} {{user.password}} {{user.email}} <button v-on:click= "deleteUser(user)">x</button>
@@ -33,15 +37,7 @@
 	</div>
 </template>
 
-<script> //src="https://unpkg.com/axios/dist/axios.min.js" this link is broken we need another way to import axios
-
-
-//this should import axios if node_modules is library root
-import Vue from 'vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-
-Vue.use(VueAxios, axios)
+<script>
 
 export default {
 		name: "SignIn",
@@ -53,29 +49,17 @@ export default {
 			}
 		},
 		methods: {
+		    //test method for geting data from laravel api/test route
+			test: function() {
+			  this.$http.get("http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/test")
+				  .then(function (response) {
+				      console.log(response)
+				  })
+			},
 			addUser: function(e){
 
-			    /*We are going to post to do laravel model using axios*/
 
-				/*!IMPORTANT We need to check if vue.js router's "/" is same as laravel router's "/"
-				(is root route the same?)
-
-				edit: it is not and adding full adress also dont work !!!
-
-				*/
-
-
-
-                Vue.axios.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/addUser', {
-                    name: this.newUser.name,
-                    last_Name: this.newUser.lastname,
-					password: this.newUser.password,
-					email_adress: this.newUser.email,
-					username: this.newUser.username,
-                })
-
-
-			    /* This output will stay for now */
+			    /* This will stay for now */
 				this.users.push({
 					fullname: this.newUser.name + " " + this.newUser.lastname,
 					email: this.newUser.email,
