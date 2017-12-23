@@ -73,6 +73,19 @@
       <path value="$PROJECT_DIR$/laravel/vendor/jakub-onderka/php-console-color" />
       <path value="$PROJECT_DIR$/laravel/vendor/psr/container" />
       <path value="$PROJECT_DIR$/laravel/vendor/barryvdh/laravel-cors" />
+      <path value="$PROJECT_DIR$/laravel/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/laravel/vendor/symfony/psr-http-message-bridge" />
+      <path value="$PROJECT_DIR$/laravel/vendor/defuse/php-encryption" />
+      <path value="$PROJECT_DIR$/laravel/vendor/phpseclib/phpseclib" />
+      <path value="$PROJECT_DIR$/laravel/vendor/zendframework/zend-diactoros" />
+      <path value="$PROJECT_DIR$/laravel/vendor/laravel/passport" />
+      <path value="$PROJECT_DIR$/laravel/vendor/league/oauth2-server" />
+      <path value="$PROJECT_DIR$/laravel/vendor/league/event" />
+      <path value="$PROJECT_DIR$/laravel/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/laravel/vendor/lcobucci/jwt" />
+      <path value="$PROJECT_DIR$/laravel/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/laravel/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/laravel/vendor/guzzlehttp/promises" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />

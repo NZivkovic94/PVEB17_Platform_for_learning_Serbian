@@ -1,5 +1,5 @@
 <template>
-	<div class = "signin">
+	<div class = "signup">
 		<h1>{{title}}</h1>
 		<div id="text_form">
 			<form v-on:submit = "addUser">
@@ -40,16 +40,17 @@
 <script>
 
 export default {
-		name: "SignIn",
+		name: "SignUp",
 		data () {
 			return {
-				title: "Sign in",
+				title: "Sign up",
 				newUser: {},
 				users: []
 			}
 		},
 		methods: {
 		    //test method for geting data from laravel api/test route
+            //it should be removed in the same time as /test route in api.php
 			test: function() {
 			  this.$http.get("http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/test")
 				  .then(function (response) {

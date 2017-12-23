@@ -23,15 +23,20 @@ npm run unit
 npm test
 
 # add new packages with 
-npm install <package_name> --save
+npm install package_name --save
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 # How to start copied laravel project
-composer update
-composer install
-cp .env.example .env
-php artisan key:generate
-restart apache
+``` bash
+composer update  
+composer install  
+cp .env.example .env  
+configure your .env file  
+php artisan key:generate  
+restart apache  
+php artisan migrate
+php artisan passport:install  
+```
 

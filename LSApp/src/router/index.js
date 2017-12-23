@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import MainPage from '@/components/MainPage'
 import About from '@/components/About'
-import SignIn from '@/components/SignIn'
+import SignUp from '@/components/SignUp'
 
 Vue.use(Router)
 
@@ -19,9 +19,9 @@ export default new Router({
     	component: About
     },
     {
-    	path: '/signin',
-    	name: 'SignIn',
-    	component: SignIn
+    	path: '/signup',
+    	name: 'Signup',
+    	component: SignUp
     }
   ]
 })
