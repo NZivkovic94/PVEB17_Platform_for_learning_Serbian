@@ -33,10 +33,10 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 composer update  
 composer install  
 cp .env.example .env  
-configure your .env file  
+#configure your .env file  
 php artisan key:generate  
-restart apache  
-php artisan migrate
+#restart apache  
+php artisan migrate #repeat this until you have no errors and you get "nothing to migrate" message *up to 20 times :( *
 php artisan passport:install  
 ```
 

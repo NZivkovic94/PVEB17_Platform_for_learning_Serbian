@@ -1,7 +1,9 @@
 <template>
   <div class="MainPage">
     <h1>{{mainTitle}}</h1>
-    <router-link to='/signup'>Sign up </router-link>
+    <router-link to='/signin'> Sign in </router-link>
+    <br>
+    <router-link to='/signup'> Sign up </router-link>
     <br>
     <router-link to='/about'> About </router-link>
   </div>

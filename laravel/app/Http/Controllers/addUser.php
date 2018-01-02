@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class addUser extends Controller
@@ -41,7 +43,18 @@ class addUser extends Controller
         //['city'=>$request->get('city'), 'timezone'=>$request->get('timezone')]
         //or just add them all to $fillabe
 
-        User::create($request->all());
+        //User::create($request->all()); we cant use this becasue we cant store raw password
+
+        $sifra = Hash::make($request->get('password'));
+
+        User::create([
+            'name' => $request->get('name'),
+            'last_name' => $request->get('last_name'),
+            'password' => $sifra,
+            'email_address' => $request->get('email_address'),
+            'username' => $request->get('username')
+        ]);
+
 
         //here we should redirect back to /signin and add more users
         //if laravel and vue.js routes work by default

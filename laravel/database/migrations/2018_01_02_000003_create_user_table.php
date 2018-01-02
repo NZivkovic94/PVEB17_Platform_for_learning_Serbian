@@ -23,7 +23,7 @@ class CreateUserTable extends Migration
             $table->increments('id_user');
             $table->string('name', 45);
             $table->string('last_name', 45);
-            $table->string('password', 45);
+            $table->string('password', 200);
             $table->date('birth_date')->nullable();
             $table->string('email_address', 45);
             $table->string('phone_number', 45)->nullable();
