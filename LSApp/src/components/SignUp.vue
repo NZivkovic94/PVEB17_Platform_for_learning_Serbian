@@ -64,7 +64,7 @@ export default {
                     name: this.newUser.name,
 					last_name: this.newUser.lastname,
                     password: this.newUser.password,
-                    email_adress: this.newUser.email,
+                    email_address: this.newUser.email,
                     username: this.newUser.username,
 
 
