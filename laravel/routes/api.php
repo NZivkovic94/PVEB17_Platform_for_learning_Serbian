@@ -27,3 +27,7 @@ Route::get('/test', function() {
     ]);
 });
 
+
+//This route will connect vue.js post method in singUp and addUser controller
+Route::post("/addUser", 'addUser@store');
+

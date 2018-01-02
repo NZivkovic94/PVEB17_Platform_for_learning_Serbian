@@ -17,8 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//This route will connect
-Route::post("/addUser", 'addUser@store');
 
 // This is generated with "php artisan make:auth"
 // We probably dont need it but its gonna stay for now

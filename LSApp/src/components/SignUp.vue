@@ -54,11 +54,21 @@ export default {
 			test: function() {
 			  this.$http.get("http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/test")
 				  .then(function (response) {
-				      console.log(response)
-				  })
+				      console.log(response.body)
+				  });
 			},
 			addUser: function(e){
 
+
+                this.$http.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/addUser', {
+                    name: this.newUser.name,
+					last_name: this.newUser.lastname,
+                    password: this.newUser.password,
+                    email_adress: this.newUser.email,
+                    username: this.newUser.username,
+
+
+                });
 
 			    /* This will stay for now */
 				this.users.push({
