@@ -51,7 +51,7 @@ class addUser extends Controller
             'name' => $request->get('name'),
             'last_name' => $request->get('last_name'),
             'password' => $sifra,
-            'email_address' => $request->get('email_address'),
+            'email' => $request->get('email'),
             'username' => $request->get('username')
         ]);
 

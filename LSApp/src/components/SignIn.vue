@@ -36,9 +36,12 @@
                 this.$http.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/oauth/token', {
                     client_id: 2,
                     //client secret should be copy-pasted from datebase on current machine
-                    client_secret: '3KuOH9tsmbIsScjjA0lz5Oo4PhqoG33R9xvbK1jK',
+                    client_secret: '4qYQfiSRXenH8Vuxf0MaGwaf1GTv42Swhcsq6PKS',
                     grant_type: 'password',
-                    email_address: this.user.email,
+
+                    //this field have to be called "username" and it must take email because passport look
+                    //for field called "email" in our database but his controller method accepts "username" attribute
+                    username: this.user.email,
                     password: this.user.password,
                 }).then(response => {
                     console.log(response)

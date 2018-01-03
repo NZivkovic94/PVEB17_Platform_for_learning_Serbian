@@ -14,6 +14,8 @@ class User extends Authenticatable
     public $timestamps=false;
     protected $primaryKey = 'id_user';
 
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,7 +23,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         // we should add all attributes if we want to mass asign them with all() in controller
-        'name', 'last_name', 'password', 'email_address', 'username',
+        'name', 'last_name', 'password', 'email', 'username',
     ];
 
     /**
