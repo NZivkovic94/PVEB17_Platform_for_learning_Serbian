@@ -36,7 +36,7 @@
                 this.$http.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/oauth/token', {
                     client_id: 2,
                     //client secret should be copy-pasted from datebase on current machine
-                    client_secret: '4qYQfiSRXenH8Vuxf0MaGwaf1GTv42Swhcsq6PKS',
+                    client_secret: 'hT99JqrbCFHUF2jMlsf29FeVgSEWb0nZVRJ8tbtp',
                     grant_type: 'password',
 
                     //this field have to be called "username" and it must take email because passport look
@@ -44,7 +44,9 @@
                     username: this.user.email,
                     password: this.user.password,
                 }).then(response => {
-                    console.log(response)
+                    //we store in local storage access token that we get from passport using
+                    //setToken method from our custom auth model
+                    this.$auth.setToken(response.body.access_token, response.body.expires_in + Date.now())
                 })
 
                 e.preventDefault();

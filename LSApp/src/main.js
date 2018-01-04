@@ -4,10 +4,15 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-
+//import our custom auth package
+import Auth from './packages/auth/Auth'
 //VueResource for http requests
 import VueResource from 'vue-resource'
+
+//we must first import all packages and then define which ones we use ( in that order !!!)
+
 Vue.use(VueResource)
+Vue.use(Auth)
 
 Vue.config.productionTip = false
 
