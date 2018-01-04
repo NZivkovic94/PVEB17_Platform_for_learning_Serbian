@@ -5,6 +5,8 @@
     <br>
     <router-link to='/signup'> Sign up </router-link>
     <br>
+    <router-link to='/lesson'> Lesson </router-link>
+    <br>
     <router-link to='/about'> About </router-link>
   </div>
 </template>

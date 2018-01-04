@@ -1,33 +1,63 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 import MainPage from '@/components/MainPage'
 import About from '@/components/About'
 import SignUp from '@/components/SignUp'
 import SignIn from '@/components/SignIn'
+import Lesson from '@/components/Lesson'
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
-export default new Router({
+const router = new VueRouter({
   routes: [
       {
-         path: '/',
-         name: 'MainPage',
-         component: MainPage
+          path: '/',
+          name: 'MainPage',
+          component: MainPage,
+          meta: {
+              forGuests: true,
+              forUser: true,
+          }
+
       },
       {
-        	path: '/about',
-        	name: 'About',
-        	component: About
+          path: '/about',
+          name: 'About',
+          component: About,
+          meta: {
+              forGuests: true,
+              forUser: true
+          }
+
       },
       {
           path: '/signup',
           name: 'Signup',
-          component: SignUp
+          component: SignUp,
+          meta: {
+              forGuests: true,
+              forUser: false
+          }
       },
       {
-    	    path: '/signin',
-    	    name: 'Signin',
-    	    component: SignIn
+          path: '/signin',
+          name: 'Signin',
+          component: SignIn,
+          meta: {
+              forGuests: true,
+              forUser: false
+          }
+      },
+      {
+          path: '/lesson',
+          name: 'Lesson',
+          component: Lesson,
+          meta: {
+              forGuests: false,
+              forUser: true
+          }
       }
   ]
 })
+
+export default router
