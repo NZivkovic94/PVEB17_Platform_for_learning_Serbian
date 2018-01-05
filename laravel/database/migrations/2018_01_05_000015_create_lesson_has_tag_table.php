@@ -22,10 +22,16 @@ class CreateLessonHasTagTable extends Migration
             $table->engine = 'InnoDB';
             $table->string('id_tag', 10);
             $table->increments('id_lesson');
+            $table->integer('id_professor')->nullable();
+            $table->integer('id_administrator');
 
             $table->index(["id_tag"], 'fk_tag_has_lesson_tag1_idx');
 
             $table->index(["id_lesson"], 'fk_tag_has_lesson_lesson1_idx');
+
+            $table->index(["id_professor"], 'fk_lesson_has_tag_professor1_idx');
+
+            $table->index(["id_administrator"], 'fk_lesson_has_tag_administrator1_idx');
 
 
             $table->foreign('id_tag', 'fk_tag_has_lesson_tag1_idx')
@@ -35,6 +41,16 @@ class CreateLessonHasTagTable extends Migration
 
             $table->foreign('id_lesson', 'fk_tag_has_lesson_lesson1_idx')
                 ->references('id_lesson')->on('lesson')
+                ->onDelete('no action')
+                ->onUpdate('no action');
+
+            $table->foreign('id_professor', 'fk_lesson_has_tag_professor1_idx')
+                ->references('id_professor')->on('professor')
+                ->onDelete('no action')
+                ->onUpdate('no action');
+
+            $table->foreign('id_administrator', 'fk_lesson_has_tag_administrator1_idx')
+                ->references('id_administrator')->on('administrator')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });

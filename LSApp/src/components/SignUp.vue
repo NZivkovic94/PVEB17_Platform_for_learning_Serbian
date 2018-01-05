@@ -9,9 +9,9 @@
 			<!-- First/Last name -->
 			<div class="form-row">
 			<div class="form-group col-md-6" >
-    			<label for="fistName">First Name</label>
+    			<label for="firstName">First Name</label>
     			<input type="text" class="form-control" id="inputFirstName" placeholder="Name"
-    			name="username" v-model ="newUser.name">
+    			name="username" v-model ="newUser.firstname">
   			</div>
   			<div class="form-group col-md-6">
     			<label for="inputAddress">Last Name</label>
@@ -21,7 +21,7 @@
   			</div>
 
   			<div class="form-group" >
-    			<label for="fistName">Username</label>
+    			<label for="firstName">Username</label>
     			<input type="text" class="form-control" id="inputUsername" placeholder="Username"
     			name="username" v-model="newUser.username">
   			</div>
@@ -79,7 +79,7 @@ export default {
 
 
                 this.$http.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/addUser', {
-                    name: this.newUser.name,
+                    first_name: this.newUser.firstname,
 					last_name: this.newUser.lastname,
                     password: this.newUser.password,
                     email: this.newUser.email,

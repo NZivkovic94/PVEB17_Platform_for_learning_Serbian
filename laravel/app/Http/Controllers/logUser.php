@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Secret;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use \GuzzleHttp\Client;
+use GuzzleHttp\Psr7;
 
-class addUser extends Controller
+class logUser extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,29 +39,32 @@ class addUser extends Controller
      */
     public function store(Request $request)
     {
+        //
+    }
 
-        //with $request->all() we take only attributes from $fillable array form model User.php
-        //if we add more attributes to form we get get them from $request array with get()
-        //['city'=>$request->get('city'), 'timezone'=>$request->get('timezone')]
-        //or just add them all to $fillabe
+    /**
+     *  Takes email and password from Vue.js and sends it to Auth route
+     *  Also takes the secret from database
+     */
 
-        //User::create($request->all()); we cant use this becasue we cant store raw password
-
+    public function signIn(Request $request)
+    {
+        $secrets=Secret::where('id', 2)->get(['secret']);
         $password = Hash::make($request->get('password'));
+        $object =
+                [
+                    'client_id' => 2,
+                    'client_secret' => $secrets[0]->secret,
+                    'grant_type' => 'password',
+                    'username' => $request->get('username'),
+                    'password' => $password
+                ];
 
-        User::create([
-            'first_name' => $request->get('first_name'),
-            'last_name' => $request->get('last_name'),
-            'password' => $password,
-            'email' => $request->get('email'),
-            'username' => $request->get('username')
-        ]);
+        $client = new Client();
+        $request = $client->post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/oauth/token')->addPostFiles($object,('Content-Type: application/json'));
+        $response = $request->send();
 
-
-        //here we should redirect back to /signin and add more users
-        //if laravel and vue.js routes work by default
-
-        return 'We added new user to database';
+        return $response->body;
     }
 
     /**

@@ -88,6 +88,7 @@
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/zendframework/zend-diactoros" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/zjango/laracurl" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -178,6 +179,7 @@
           <root url="file://$MODULE_DIR$/laravel/vendor/vlucas/phpdotenv" />
           <root url="file://$MODULE_DIR$/laravel/vendor/webmozart/assert" />
           <root url="file://$MODULE_DIR$/laravel/vendor/zendframework/zend-diactoros" />
+          <root url="file://$MODULE_DIR$/laravel/vendor/zjango/laracurl" />
         </CLASSES>
         <SOURCES>
           <root url="file://$MODULE_DIR$/laravel/vendor/barryvdh/laravel-cors" />
@@ -264,6 +266,19 @@
           <root url="file://$MODULE_DIR$/laravel/vendor/vlucas/phpdotenv" />
           <root url="file://$MODULE_DIR$/laravel/vendor/webmozart/assert" />
           <root url="file://$MODULE_DIR$/laravel/vendor/zendframework/zend-diactoros" />
+          <root url="file://$MODULE_DIR$/laravel/vendor/zjango/laracurl" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="PHARS">
+        <CLASSES>
+          <root url="phar://$MODULE_DIR$/laravel/vendor/phar-io/manifest/tests/_fixture/test.phar/" />
+          <root url="phar://$MODULE_DIR$/laravel/vendor/phpunit/phpunit/tests/_files/phpunit-example-extension/tools/phpunit.d/phpunit-example-extension-1.0.1.phar/" />
+        </CLASSES>
+        <SOURCES>
+          <root url="phar://$MODULE_DIR$/laravel/vendor/phar-io/manifest/tests/_fixture/test.phar/" />
+          <root url="phar://$MODULE_DIR$/laravel/vendor/phpunit/phpunit/tests/_files/phpunit-example-extension/tools/phpunit.d/phpunit-example-extension-1.0.1.phar/" />
         </SOURCES>
       </library>
     </orderEntry>

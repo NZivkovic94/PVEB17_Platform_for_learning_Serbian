@@ -35,12 +35,13 @@
         methods: {
             logUser: function (e) {
                 //this route have to be checked because its not same on all machines
-                this.$http.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/oauth/token', {
+                this.$http.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/signIn', {
+                    /*
                     client_id: 6,
                     //client secret should be copy-pasted from datebase on current machine
-                    client_secret: 'r5AVZ5PHd7Yf3qHnOhPKw5pjITWhuqqxibXyiGaI',
+                    client_secret: 'QsoVcRinfuHctGCRNm7pbFBVMpXxrhJqPLIC6b3o',
                     grant_type: 'password',
-
+                    */
                     //this field have to be called "username" and it must take email because passport look
                     //for field called "email" in our database but his controller method accepts "username" attribute
                     username: this.user.email,
@@ -48,10 +49,13 @@
                 }).then(response => {
                     //we store in local storage access token that we get from passport using
                     //setToken method from our custom auth model
+                    /*
                     this.$auth.setToken(response.body.access_token, response.body.expires_in + Date.now())
 
                     //after we save tokens we get redirected to /lesson
                     this.$router.push('/lesson')
+                    */
+                    console.log(response.body)
                 })
 
                 e.preventDefault();
