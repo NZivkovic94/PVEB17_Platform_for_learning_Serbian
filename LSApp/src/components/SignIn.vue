@@ -36,9 +36,9 @@
             logUser: function (e) {
                 //this route have to be checked because its not same on all machines
                 this.$http.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/oauth/token', {
-                    client_id: 6,
+                    client_id: 2,
                     //client secret should be copy-pasted from datebase on current machine
-                    client_secret: 'r5AVZ5PHd7Yf3qHnOhPKw5pjITWhuqqxibXyiGaI',
+                    client_secret: 'yvwds3WzC8HCtIf3ph9RlosiR6o6jAuwuNtzbVbX',
                     grant_type: 'password',
 
                     //this field have to be called "username" and it must take email because passport look

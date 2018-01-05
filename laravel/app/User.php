@@ -23,7 +23,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         // we should add all attributes if we want to mass asign them with all() in controller
-        'name', 'last_name', 'password', 'email', 'username',
+        'first_name', 'last_name', 'password', 'email', 'username',
     ];
 
     /**

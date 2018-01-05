@@ -79,7 +79,7 @@ export default {
 
 
                 this.$http.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/addUser', {
-                    name: this.newUser.name,
+                    first_name: this.newUser.name,
 					last_name: this.newUser.lastname,
                     password: this.newUser.password,
                     email: this.newUser.email,

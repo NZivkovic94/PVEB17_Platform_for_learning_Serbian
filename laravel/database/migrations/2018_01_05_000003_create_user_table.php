@@ -21,7 +21,7 @@ class CreateUserTable extends Migration
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id_user');
-            $table->string('name', 45);
+            $table->string('first_name', 45);
             $table->string('last_name', 45);
             $table->string('password', 150);
             $table->date('birth_date')->nullable();
@@ -31,11 +31,7 @@ class CreateUserTable extends Migration
             $table->string('country', 45)->nullable();
             $table->string('city', 45)->nullable();
             $table->string('timezone', 45)->nullable();
-            $table->string('username', 45);
-            $table->timestamp('first_login')->nullable();
-            $table->timestamp('last_login')->nullable();
-            $table->timestamp('current_login')->nullable();
-            $table->timestamp('last_logout')->nullable();
+            $table->string('username', 45)->nullable();
             $table->char('profile_picture_url')->nullable();
         });
     }

@@ -45,12 +45,12 @@ class addUser extends Controller
 
         //User::create($request->all()); we cant use this becasue we cant store raw password
 
-        $sifra = Hash::make($request->get('password'));
+        $pass = Hash::make($request->get('password'));
 
         User::create([
-            'name' => $request->get('name'),
+            'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
-            'password' => $sifra,
+            'password' => $pass,
             'email' => $request->get('email'),
             'username' => $request->get('username')
         ]);
