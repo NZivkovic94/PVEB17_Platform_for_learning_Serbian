@@ -1,23 +1,34 @@
 <template>
   <div id="app">
-    <img src="./assets/serbiaLogo.png">
-    <router-view/>
+    <header class="app-header">
+      <app-nav></app-nav>
+    </header>
+    <main class="container">
+      <router-view></router-view>
+    </main>
+    
+    <!--
+    <footer class="footer">
+       <app-footer></app-footer>
+    </footer>
+  -->
+
   </div>
 </template>
 
 <script>
+import AppNav from './components/AppNav'
+import AppFooter from './components/AppFooter'
 export default {
-  name: 'app'
+  name: 'app' ,
+  components: { AppNav , AppFooter }
 }
 </script>
 
-<style>
+<style type="text/css">
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  height: 100%;
 }
+
 </style>

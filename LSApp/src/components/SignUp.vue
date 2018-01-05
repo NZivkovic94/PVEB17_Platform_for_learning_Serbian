@@ -1,39 +1,57 @@
 <template>
 	<div class = "signup">
 		<h1>{{title}}</h1>
+
+
 		<div id="text_form">
-			<form v-on:submit = "addUser">
-				<label>Enter name </label>
-				<input type="text" name="username" v-model="newUser.name"> 
-				<br>
-				<label>Enter lastname</label>
-				<input type="text" name="username" v-model="newUser.lastname"> 
-				<br>
-				<label>Enter email  </label>
-				<input type="email" name="email" v-model="newUser.email"> 
-				<br>
-				<label>Enter username</label>
-				<input type="text" name="username" v-model="newUser.username"> 
-				<br>
-				<label>Enter password</label>
-				<input type="password" name="password" v-model="newUser.password"> 
-				<br>
-				<input type= "submit" value="Add User">
+		<form v-on:submit = "addUser">
+
+			<!-- First/Last name -->
+			<div class="form-row">
+			<div class="form-group col-md-6" >
+    			<label for="fistName">First Name</label>
+    			<input type="text" class="form-control" id="inputFirstName" placeholder="Name"
+    			name="username" v-model ="newUser.name">
+  			</div>
+  			<div class="form-group col-md-6">
+    			<label for="inputAddress">Last Name</label>
+    			<input type="text" class="form-control" id="inputLastName" placeholder="Last name"
+    			name="username" v-model="newUser.lastname">
+  			</div>
+  			</div>
+
+  			<div class="form-group" >
+    			<label for="fistName">Username</label>
+    			<input type="text" class="form-control" id="inputUsername" placeholder="Username"
+    			name="username" v-model="newUser.username">
+  			</div>
+  			<div class="form-row">
+    			<div class="form-group col-md-6">
+      				<label for="inputEmail4">Email</label>
+      				<input type="email" class="form-control" id="inputEmail4" placeholder="Email"
+      				name="email" v-model="newUser.email">
+    			</div>
+    			<div class="form-group col-md-6">
+      				<label for="inputPassword4">Password</label>
+      				<input type="password" class="form-control" id="inputPassword4" placeholder="Password"
+      				name="password" v-model="newUser.password">
+    			</div>
+   			</div>
+
+  			
+    		<div class="form-group">
+      		<label for="inputState">Role</label>
+      		<select id="inputState" class="form-control">
+        		<option selected>Student</option>
+        		<option>Teacher</option>
+        		<option>Admin</option>
+        		<option>Guest</option>
+      			</select>
+      		</div>	
+    	  	<button type="submit" class="btn btn-primary" value="Add User">Sign in</button>
+    	  	<button type="button" class="btn btn-primary" @click="test">Test Laravel</button>
 			</form>
 		</div>
-
-		<button @click="test">
-			console.log data from laravel
-		</button>
-
-		<ul>
-			<li v-for = "user in users">
-				{{user.fullname}} {{user.username}} {{user.password}} {{user.email}} <button v-on:click= "deleteUser(user)">x</button>
-			</li>
-			
-		</ul>
-
-		<router-link to='/'>Back</router-link>
 	</div>
 </template>
 
@@ -93,6 +111,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1, h2 {
+	margin-top: 2%;
+	margin-bottom: 5%;
+   text-align: center;
   font-weight: normal;
 }
 ul {
@@ -107,7 +128,7 @@ a {
   color: #42b983;
 }
 #text_form{
-	width:200px;
+	width:50%;
 	margin:auto;
 }
 
