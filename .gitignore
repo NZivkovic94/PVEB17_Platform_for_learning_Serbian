@@ -27,3 +27,8 @@
 *.exe
 *.out
 *.app
+
+#Intellij IDE user specific settings
+workspace.xml
+tasks.xml
+*.iws
