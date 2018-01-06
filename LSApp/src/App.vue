@@ -6,12 +6,13 @@
     <main class="container">
       <router-view></router-view>
     </main>
-    
+
     <!--
     <footer class="footer">
        <app-footer></app-footer>
     </footer>
   -->
+
 
   </div>
 </template>

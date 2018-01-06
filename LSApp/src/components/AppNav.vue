@@ -88,11 +88,13 @@
 
       </ul>
 
-      <form class="form-inline my-5 my-lg-0">
+      <form class="form-inline my-5 my-lg-0" v-if="isLogged === false ">
          <router-link class="nav-link" to='/signin'>Sign in <span class="sr-only">(current)</span></router-link>
          or 
          <router-link class="nav-link" to='/signup'>Sign up <span class="sr-only">(current)</span></router-link>
       </form>
+
+      <router-link class="nav-link" to='/' v-if="isLogged === true" v-on:click.native="logOut">Sign out <span class="sr-only">(current)</span></router-link>
     
     </div>
   </nav>
@@ -101,7 +103,32 @@
 
 
 <script>
+
+
 export default {
+
+  name: "AppNav",
+        data(){
+          return {
+            isLogged: this.isLoggedIn()
+          }
+        },
+        created() {
+          this.$bus.$on('logged', () => {this.isLogged = this.isLoggedIn()})
+
+        },
+        methods: {
+
+            logOut: function (e) {
+                    this.$auth.destroyToken();
+                    this.isLogged = this.isLoggedIn();
+                    this.$router.push('/');
+                    e.preventDefault();
+            },
+            isLoggedIn: function () {
+              return this.$auth.isAuthenticated();
+            }
+        }
 }
 </script>
 

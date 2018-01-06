@@ -2,8 +2,10 @@
 export default function (Vue) {
     //authentication object with authentication methods
     Vue.auth = {
+
         //get access token and expiration date from oauth token that we got when we authenticated user
         //and store them in browser aka localStorage
+
         setToken (token, expiration) {
             localStorage.setItem('token', token)
             localStorage.setItem('expiration', expiration)

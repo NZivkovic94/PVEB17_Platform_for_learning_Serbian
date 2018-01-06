@@ -41,8 +41,9 @@
                 }).then(response => {
                     //we store in local storage access token that we get from passport using
                     //setToken method from our custom auth model
-                    this.$auth.setToken(response.body.access_token, response.body.expires_in + Date.now())
+                    this.$auth.setToken(response.body.access_token, response.body.expires_in + Date.now());
                     //after we save tokens we get redirected to /lesson
+                    this.$bus.$emit('logged', 'User logged')
                     this.$router.push('/lesson')
 
                 })

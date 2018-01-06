@@ -9,6 +9,7 @@ import Auth from './packages/auth/Auth'
 //VueResource for http requests
 import VueResource from 'vue-resource'
 
+
 //we must first import all packages and then define which ones we use ( in that order !!!)
 
 Vue.use(VueResource)
@@ -16,6 +17,8 @@ Vue.use(Auth)
 
 Vue.config.productionTip = false
 
+
+Vue.prototype.$bus = new Vue();
 
 /*
 -this method is called every time we want to go to some route
