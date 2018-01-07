@@ -45,11 +45,12 @@
         </li>
          <li class="nav-item ">
           <router-link class="nav-link" 
-                       to="/dictionary" 
+                       to="/admindashboard"
+                       v-on:click.native="setAuthenticatedAsAdmin"
                        active-class="active"
                        exact
                        disabled>
-          Dictionary
+          Admin Dashboard
           </router-link>
         </li>
          <li class="nav-item ">
@@ -118,7 +119,6 @@ export default {
         },
         updated(){
             this.setAuthenticatedUser()
-            //this.setAuthenticatedAdmin()
         },
         methods: {
 
@@ -137,14 +137,22 @@ export default {
                         { headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}})
                         .then(response => {
                             this.$auth.setAuthenticated(response.body)
-                            console.log(this.$auth.getAuthenticated())
+                            //console.log(this.$auth.getAuthenticated().id_user)
                         })
             },
-            // setAuthenticatedAdmin: function () {
-            //     let id_user = this.$auth.getAuthenticated()
-            //     console.log(id_user)
-            // }
+            setAuthenticatedAsAdmin: function(){
+                this.$http.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/isAdmin',
+                    {
+                        "id_administrator" : this.$auth.getAuthenticated().id_user
+                    }).then(response => {
+                    console.log(response.body)
+                    return response.body
+                }).then(response => {
+                    console.log(response)
+                    this.$auth.setAdmin(response)
+                })
 
+            },
 
         }
 }

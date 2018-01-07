@@ -27,29 +27,30 @@ and if they cant it redirect them to /lessons
 -if we are not authenticated it checks can guest go to that route if they cant they get redirected to
 ./signin
 */
-
 Router.beforeEach(
     (to, from, next) => {
-      if(Vue.auth.isAuthenticated()) {
-        if(!to.matched.some(record => record.meta.forUser)) {
-          next({
-              path: '/lesson'
-          })
+        if (Vue.auth.isAuthenticated()) {
+            if (!Vue.auth.isAuthenticatedAsAdmin() ){
+                if (!to.matched.some(record => record.meta.forUser)) {
+                    next({
+                        path: '/lesson'
+                    })
+                }
+                else
+                    next()
+            }
+            else
+                next()
         }
-        else
-          next()
-      }
-      else if(!Vue.auth.isAuthenticated()) {
-          if(!to.matched.some(record => record.meta.forGuests)) {
-              next({
-                  path: '/signin'
-              })
-          }
-          else
-              next()
-      }
-      else
-        next()
+        else {
+            if (!to.matched.some(record => record.meta.forGuests)) {
+                next({
+                    path: '/signin'
+                })
+            }
+            else
+                next()
+        }
     }
 )
 

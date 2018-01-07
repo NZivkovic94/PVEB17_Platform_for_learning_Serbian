@@ -31,6 +31,8 @@ export default function (Vue) {
         destroyToken () {
             localStorage.removeItem('token')
             localStorage.removeItem('expiration')
+
+            admin = false
         },
         //check if user is authenticated
         isAuthenticated () {
@@ -51,10 +53,13 @@ export default function (Vue) {
         isAuthenticatedAsAdmin(){
             return admin
         },
-
-        setAuthenticatedAsAdmin(data){
-            admin = data
-        }
+        setAdmin(t){
+            if(String(t) == "true")
+                admin = true
+            else
+                admin = false
+            console.log(admin)
+        },
 
     }
 

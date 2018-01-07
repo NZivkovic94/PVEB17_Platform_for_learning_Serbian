@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Administrator;
 use App\Secret;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
@@ -64,6 +65,16 @@ class logUser extends Controller
 
         return $response;
     }
+
+    public function isAdmin(Request $request)
+    {
+        if(Administrator::where('id_administrator', $request->get('id_administrator'))->count() )
+            return "true";
+        else
+            return "false";
+    }
+
+
     /**
      * Display the specified resource.
      *

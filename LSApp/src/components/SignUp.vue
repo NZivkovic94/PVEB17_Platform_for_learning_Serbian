@@ -48,7 +48,7 @@
         		<option>Guest</option>
       			</select>
       		</div>	
-    	  	<button type="submit" class="btn btn-primary" value="Add User">Sign in</button>
+    	  	<button type="submit" class="btn btn-primary" value="Add User">Sign up</button>
     	  	<button type="button" class="btn btn-primary" @click="test">Test Laravel</button>
 			</form>
 		</div>
