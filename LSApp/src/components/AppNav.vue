@@ -114,8 +114,11 @@ export default {
           }
         },
         created() {
-          this.$bus.$on('logged', () => {this.isLogged = this.isLoggedIn()})
-          this.setAuthenticatedUser()
+            this.$bus.$on('logged', () => {this.isLogged = this.isLoggedIn()})
+        },
+        updated(){
+            this.setAuthenticatedUser()
+            //this.setAuthenticatedAdmin()
         },
         methods: {
 
@@ -129,12 +132,19 @@ export default {
               return this.$auth.isAuthenticated();
             },
             setAuthenticatedUser: function () {
-                this.$http.get('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/user')
-                    .then(response => {
-                        this.$auth.setAuthenticated(response.body)
-                        console.log(this.$auth.getAuthenticated());
-                    })
-            }
+                 if(localStorage.getItem('token'))
+                    this.$http.get('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/user',
+                        { headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}})
+                        .then(response => {
+                            this.$auth.setAuthenticated(response.body)
+                            console.log(this.$auth.getAuthenticated())
+                        })
+            },
+            // setAuthenticatedAdmin: function () {
+            //     let id_user = this.$auth.getAuthenticated()
+            //     console.log(id_user)
+            // }
+
 
         }
 }
