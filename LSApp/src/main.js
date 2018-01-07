@@ -53,6 +53,8 @@ Router.beforeEach(
     }
 )
 
+Vue.http.headers.common['Authorization'] = 'Bearer ' + Vue.auth.getToken();
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

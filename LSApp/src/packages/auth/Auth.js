@@ -1,5 +1,7 @@
 //our custom package for user authentication using laravel passport tokens
 export default function (Vue) {
+    let authenticatedUser = {}
+
     //authentication object with authentication methods
     Vue.auth = {
 
@@ -36,6 +38,14 @@ export default function (Vue) {
                 return true
             else
                 return false
+        },
+
+        setAuthenticated(data){
+            authenticatedUser = data
+        },
+
+        getAuthenticated(){
+            return authenticatedUser
         }
     }
 

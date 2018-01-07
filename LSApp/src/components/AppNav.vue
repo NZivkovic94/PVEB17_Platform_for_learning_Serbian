@@ -115,7 +115,7 @@ export default {
         },
         created() {
           this.$bus.$on('logged', () => {this.isLogged = this.isLoggedIn()})
-
+          this.setAuthenticatedUser()
         },
         methods: {
 
@@ -127,7 +127,15 @@ export default {
             },
             isLoggedIn: function () {
               return this.$auth.isAuthenticated();
+            },
+            setAuthenticatedUser: function () {
+                this.$http.get('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/user')
+                    .then(response => {
+                        this.$auth.setAuthenticated(response.body)
+                        console.log(this.$auth.getAuthenticated());
+                    })
             }
+
         }
 }
 </script>
