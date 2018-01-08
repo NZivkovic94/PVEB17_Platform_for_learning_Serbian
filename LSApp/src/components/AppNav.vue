@@ -62,6 +62,16 @@
                   ProfessorMainPage
               </router-link>
           </li>
+          <li class="nav-item ">
+              <router-link class="nav-link"
+                           to="/studentmainpage"
+                           v-if = "isStudent === true"
+                           active-class="active"
+                           exact
+                           disabled>
+                  StudentMainPage
+              </router-link>
+          </li>
         <li class="nav-item ">
           <router-link class="nav-link" 
                        to="/admindashboard"
@@ -123,7 +133,8 @@ export default {
           return {
               isLogged: this.isLoggedIn(),
               isAdmin: this.isLoggedAdmin(),
-              isProfessor: this.isLoggedProfessor()
+              isProfessor: this.isLoggedProfessor(),
+              isStudent: this.isLoggedStudent(),
 
 
           }
@@ -154,6 +165,9 @@ export default {
             isLoggedProfessor: function(){
                 return this.$auth.isAuthenticatedAsProfessor();
             },
+            isLoggedStudent: function(){
+                return this.$auth.isAuthenticatedAsStudent();
+            },
             setAuthenticatedUser: function () {
                  if(localStorage.getItem('token'))
                     this.$http.get('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/user',
@@ -164,6 +178,7 @@ export default {
                         }).then(() => {
                             this.setAuthenticatedAsAdmin();
                             this.setAuthenticatedAsProfessor();
+                            this.setAuthenticatedAsStudent();
                         });
             },
             
@@ -189,6 +204,19 @@ export default {
                 }).then(response => {
                     this.$auth.setProfessor(response)
                     this.isProfessor = this.isLoggedProfessor();
+
+                })
+
+            },
+            setAuthenticatedAsStudent: function(){
+                this.$http.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/isStudent',
+                    {
+                        "id_student" : this.$auth.getAuthenticated().id_user
+                    }).then(response => {
+                    return response.body
+                }).then(response => {
+                    this.$auth.setStudent(response)
+                    this.isStudent = this.isLoggedStudent();
 
                 })
 

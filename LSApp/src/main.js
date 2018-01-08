@@ -32,13 +32,24 @@ Router.beforeEach(
         if (Vue.auth.isAuthenticated()) {
             if (!Vue.auth.isAuthenticatedAsAdmin() ) {
                 if (!Vue.auth.isAuthenticatedAsProfessor()) {
-                    if (!to.matched.some(record => record.meta.forUser)) {
-                        next({
-                            path: '/lesson'
-                        })
+                    if (!Vue.auth.isAuthenticatedAsStudent()) {
+                        if (!to.matched.some(record => record.meta.forUser)) {
+                            next({
+                                path: '/lesson'
+                            })
+                        }
+                        else
+                            next()
                     }
-                    else
-                        next()
+                    else {
+                        if (!to.matched.some(record => record.meta.forStudent)) {
+                            next({
+                                path: 'studentmainpage'
+                            })
+                        }
+                        else
+                            next()
+                    }
                 }
                 else {
                     if (!to.matched.some(record => record.meta.forProfessor)) {

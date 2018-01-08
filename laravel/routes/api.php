@@ -33,4 +33,5 @@ Route::post("/addUser", 'addUser@store');
 Route::post("/signIn", 'logUser@signIn');
 
 Route::post("/isAdmin", 'logUser@isAdmin');
-Route::post("isProfessor", 'logUser@isProfessor');
+Route::post("/isProfessor", 'logUser@isProfessor');
+Route::post("/isStudent", 'logUser@isStudent');

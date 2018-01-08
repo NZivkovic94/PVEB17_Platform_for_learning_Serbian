@@ -7,6 +7,7 @@ import SignIn from '@/components/SignIn'
 import Lesson from '@/components/Lesson'
 import AdminDashboard from '@/components/AdminDashboard'
 import ProfessorMainPage from '@/components/ProfessorMainPage'
+import StudentMainPage from '@/components/StudentMainPage'
 
 
 Vue.use(VueRouter)
@@ -21,6 +22,7 @@ const router = new VueRouter({
               forGuests: true,
               forUser: true,
               forProfessor: true,
+              forStudent: true,
           }
 
       },
@@ -32,6 +34,7 @@ const router = new VueRouter({
               forGuests: true,
               forUser: true,
               forProfessor: true,
+              forStudent: true,
           }
 
       },
@@ -43,6 +46,7 @@ const router = new VueRouter({
               forGuests: true,
               forUser: false,
               forProfessor: false,
+              forStudent: false,
           }
       },
       {
@@ -53,6 +57,7 @@ const router = new VueRouter({
               forGuests: true,
               forUser: false,
               forProfessor: false,
+              forStudent: false,
           }
       },
       {
@@ -63,6 +68,18 @@ const router = new VueRouter({
               forGuests: false,
               forUser: false,
               forProfessor: true,
+              forStudent: false,
+          }
+      },
+      {
+          path: '/studentmainpage',
+          name: 'StudentMainPage',
+          component: StudentMainPage,
+          meta: {
+              forGuests: false,
+              forUser: false,
+              forProfessor: false,
+              forStudent: true,
           }
       },
       {
@@ -73,6 +90,7 @@ const router = new VueRouter({
               forGuests: false,
               forUser: false,
               forProfessor: false,
+              forStudent: false,
           }
       },
       {
@@ -83,6 +101,7 @@ const router = new VueRouter({
               forGuests: false,
               forUser: true,
               forProfessor: true,
+              forStudent: true,
           }
       }
   ]

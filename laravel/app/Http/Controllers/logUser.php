@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Administrator;
 use App\Secret;
 use App\Professor;
+use App\Student;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -78,6 +79,13 @@ class logUser extends Controller
     public function isProfessor(Request $request)
     {
         if(Professor::where('id_professor', $request->get('id_professor'))->count() )
+            return "true";
+        else
+            return "false";
+    }
+    public function isStudent(Request $request)
+    {
+        if(Student::where('id_student', $request->get('id_student'))->count() )
             return "true";
         else
             return "false";
