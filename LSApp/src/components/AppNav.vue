@@ -43,7 +43,7 @@
           Quizzes 
           </router-link>
         </li>
-         <li class="nav-item ">
+          <li class="nav-item ">
           <router-link class="nav-link" 
                        to="/settings" 
                        active-class="active"
@@ -52,8 +52,17 @@
           Settings
           </router-link>
         </li>
+          <li class="nav-item ">
+              <router-link class="nav-link"
+                           to="/professormainpage"
+                           v-if = "isProfessor === true"
+                           active-class="active"
+                           exact
+                           disabled>
+                  ProfessorMainPage
+              </router-link>
+          </li>
         <li class="nav-item ">
-          <!--  v-on:click.native = "setAuthenticatedAsAdmin" -->
           <router-link class="nav-link" 
                        to="/admindashboard"
                        v-if = "isAdmin === true"                       
@@ -112,8 +121,11 @@ export default {
   name: "AppNav",
         data(){
           return {
-            isLogged: this.isLoggedIn(),
-            isAdmin: this.isLoggedAdmin()
+              isLogged: this.isLoggedIn(),
+              isAdmin: this.isLoggedAdmin(),
+              isProfessor: this.isLoggedProfessor()
+
+
           }
         },
         created() {
@@ -129,6 +141,7 @@ export default {
                     this.$auth.destroyToken();
                     this.isLogged = this.isLoggedIn();
                     this.isAdmin = this.isLoggedAdmin();
+                    this.isProfessor = this.isLoggedProfessor();
                     this.$router.push('/');
                     e.preventDefault();
             },
@@ -138,6 +151,9 @@ export default {
             isLoggedAdmin: function(){
               return this.$auth.isAuthenticatedAsAdmin();
             },
+            isLoggedProfessor: function(){
+                return this.$auth.isAuthenticatedAsProfessor();
+            },
             setAuthenticatedUser: function () {
                  if(localStorage.getItem('token'))
                     this.$http.get('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/user',
@@ -145,9 +161,10 @@ export default {
                         .then(response => {
                             this.$auth.setAuthenticated(response.body)
                             //console.log(this.$auth.getAuthenticated().id_user)
-                        }).then(
-                        () => {this.setAuthenticatedAsAdmin();}
-                        );
+                        }).then(() => {
+                            this.setAuthenticatedAsAdmin();
+                            this.setAuthenticatedAsProfessor();
+                        });
             },
             
             setAuthenticatedAsAdmin: function(){
@@ -159,6 +176,19 @@ export default {
                 }).then(response => {
                     this.$auth.setAdmin(response)
                     this.isAdmin = this.isLoggedAdmin();
+
+                })
+
+            },
+            setAuthenticatedAsProfessor: function(){
+                this.$http.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/isProfessor',
+                    {
+                        "id_professor" : this.$auth.getAuthenticated().id_user
+                    }).then(response => {
+                    return response.body
+                }).then(response => {
+                    this.$auth.setProfessor(response)
+                    this.isProfessor = this.isLoggedProfessor();
 
                 })
 

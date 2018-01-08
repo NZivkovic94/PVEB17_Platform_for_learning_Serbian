@@ -6,6 +6,7 @@ import SignUp from '@/components/SignUp'
 import SignIn from '@/components/SignIn'
 import Lesson from '@/components/Lesson'
 import AdminDashboard from '@/components/AdminDashboard'
+import ProfessorMainPage from '@/components/ProfessorMainPage'
 
 
 Vue.use(VueRouter)
@@ -19,6 +20,7 @@ const router = new VueRouter({
           meta: {
               forGuests: true,
               forUser: true,
+              forProfessor: true,
           }
 
       },
@@ -28,7 +30,8 @@ const router = new VueRouter({
           component: About,
           meta: {
               forGuests: true,
-              forUser: true
+              forUser: true,
+              forProfessor: true,
           }
 
       },
@@ -38,7 +41,8 @@ const router = new VueRouter({
           component: SignUp,
           meta: {
               forGuests: true,
-              forUser: false
+              forUser: false,
+              forProfessor: false,
           }
       },
       {
@@ -47,7 +51,18 @@ const router = new VueRouter({
           component: SignIn,
           meta: {
               forGuests: true,
-              forUser: false
+              forUser: false,
+              forProfessor: false,
+          }
+      },
+      {
+          path: '/professormainpage',
+          name: 'ProfessorMainPage',
+          component: ProfessorMainPage,
+          meta: {
+              forGuests: false,
+              forUser: false,
+              forProfessor: true,
           }
       },
       {
@@ -56,7 +71,8 @@ const router = new VueRouter({
           component: AdminDashboard,
           meta: {
               forGuests: false,
-              forUser: false
+              forUser: false,
+              forProfessor: false,
           }
       },
       {
@@ -65,7 +81,8 @@ const router = new VueRouter({
           component: Lesson,
           meta: {
               forGuests: false,
-              forUser: true
+              forUser: true,
+              forProfessor: true,
           }
       }
   ]

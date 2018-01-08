@@ -2,6 +2,7 @@
 export default function (Vue) {
     let authenticatedUser = {}
     let admin = false
+    let professor = false
     //authentication object with authentication methods
     Vue.auth = {
 
@@ -33,6 +34,7 @@ export default function (Vue) {
             localStorage.removeItem('expiration')
 
             admin = false
+            professor = false
         },
         //check if user is authenticated
         isAuthenticated () {
@@ -58,6 +60,15 @@ export default function (Vue) {
                 admin = true
             else
                 admin = false
+        },
+        isAuthenticatedAsProfessor(){
+            return professor
+        },
+        setProfessor(t){
+            if(String(t) == "true")
+                professor = true
+            else
+                professor = false
         },
 
     }

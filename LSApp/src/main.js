@@ -30,14 +30,25 @@ and if they cant it redirect them to /lessons
 Router.beforeEach(
     (to, from, next) => {
         if (Vue.auth.isAuthenticated()) {
-            if (!Vue.auth.isAuthenticatedAsAdmin() ){
-                if (!to.matched.some(record => record.meta.forUser)) {
-                    next({
-                        path: '/lesson'
-                    })
+            if (!Vue.auth.isAuthenticatedAsAdmin() ) {
+                if (!Vue.auth.isAuthenticatedAsProfessor()) {
+                    if (!to.matched.some(record => record.meta.forUser)) {
+                        next({
+                            path: '/lesson'
+                        })
+                    }
+                    else
+                        next()
                 }
-                else
-                    next()
+                else {
+                    if (!to.matched.some(record => record.meta.forProfessor)) {
+                        next({
+                            path: 'professormainpage'
+                        })
+                    }
+                    else
+                        next()
+                }
             }
             else
                 next()
