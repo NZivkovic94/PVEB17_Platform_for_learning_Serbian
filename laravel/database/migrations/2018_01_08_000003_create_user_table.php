@@ -33,6 +33,8 @@ class CreateUserTable extends Migration
             $table->string('timezone', 45)->nullable();
             $table->string('username', 45)->nullable();
             $table->char('profile_picture_url')->nullable();
+
+            $table->unique(["email"], 'email_UNIQUE');
         });
     }
 

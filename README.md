@@ -36,7 +36,7 @@ cp .env.example .env
 #configure your .env file  
 php artisan key:generate  
 #restart apache  
-php artisan migrate #repeat this until you have no errors and you get "nothing to migrate" message *up to 20 times :( *
+php artisan migrate #repeat this until you have no errors and you get "nothing to migrate" message *up to 25 times :( *
 php artisan passport:install  
 ```
 
