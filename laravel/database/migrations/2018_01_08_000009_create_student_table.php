@@ -21,10 +21,10 @@ class CreateStudentTable extends Migration
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id_student');
-            $table->string('id_native_language', 3);
-            $table->integer('institution_id_institution');
+            $table->string('id_native_language', 3)->nullable();
+            $table->integer('id_institution')->nullable();
 
-            $table->index(["institution_id_institution"], 'fk_student_institution1_idx');
+            $table->index(["id_institution"], 'fk_student_institution1_idx');
 
             $table->index(["id_native_language"], 'fk_student_language1_idx');
 
@@ -34,7 +34,7 @@ class CreateStudentTable extends Migration
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
-            $table->foreign('institution_id_institution', 'fk_student_institution1_idx')
+            $table->foreign('id_institution', 'fk_student_institution1_idx')
                 ->references('id_institution')->on('institution')
                 ->onDelete('no action')
                 ->onUpdate('no action');

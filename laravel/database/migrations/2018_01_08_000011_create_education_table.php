@@ -20,8 +20,8 @@ class CreateEducationTable extends Migration
         if (Schema::hasTable($this->set_schema_table)) return;
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id_institution');
-            $table->integer('id_professor');
+            $table->integer('id_institution');
+            $table->increments('id_professor');
             $table->date('graduated_date')->nullable();
             $table->string('degree', 45)->nullable();
 

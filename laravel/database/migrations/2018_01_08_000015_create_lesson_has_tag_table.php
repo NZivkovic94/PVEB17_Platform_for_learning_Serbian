@@ -23,7 +23,7 @@ class CreateLessonHasTagTable extends Migration
             $table->string('id_tag', 10);
             $table->increments('id_lesson');
             $table->integer('id_professor')->nullable();
-            $table->integer('id_administrator');
+            $table->integer('id_administrator')->nullable();
 
             $table->index(["id_tag"], 'fk_tag_has_lesson_tag1_idx');
 
