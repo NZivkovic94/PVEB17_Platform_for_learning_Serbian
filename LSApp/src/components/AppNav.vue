@@ -46,7 +46,7 @@
          <li class="nav-item ">
           <router-link class="nav-link" 
                        to="/admindashboard"
-                       v-on:click.native="setAuthenticatedAsAdmin"
+                       v-on:mouseover.native = "setAuthenticatedAsAdmin"
                        active-class="active"
                        exact
                        disabled>
@@ -145,10 +145,8 @@ export default {
                     {
                         "id_administrator" : this.$auth.getAuthenticated().id_user
                     }).then(response => {
-                    console.log(response.body)
                     return response.body
                 }).then(response => {
-                    console.log(response)
                     this.$auth.setAdmin(response)
                 })
 
