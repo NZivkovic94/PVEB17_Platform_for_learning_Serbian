@@ -45,21 +45,22 @@
         </li>
          <li class="nav-item ">
           <router-link class="nav-link" 
-                       to="/admindashboard"
-                       v-on:mouseover.native = "setAuthenticatedAsAdmin"
-                       active-class="active"
-                       exact
-                       disabled>
-          Admin Dashboard
-          </router-link>
-        </li>
-         <li class="nav-item ">
-          <router-link class="nav-link" 
                        to="/settings" 
                        active-class="active"
                        exact
                        disabled>
           Settings
+          </router-link>
+        </li>
+        <li class="nav-item ">
+          <!--  v-on:click.native = "setAuthenticatedAsAdmin" -->
+          <router-link class="nav-link" 
+                       to="/admindashboard"
+                       v-if = "isAdmin === true"                       
+                       active-class="active"
+                       exact
+                       disabled>
+          Admin Dashboard
           </router-link>
         </li>
 
@@ -95,7 +96,7 @@
          <router-link class="nav-link" to='/signup'>Sign up <span class="sr-only">(current)</span></router-link>
       </form>
 
-      <router-link class="nav-link" to='/' v-if="isLogged === true" v-on:click.native="logOut">Sign out <span class="sr-only">(current)</span></router-link>
+      <router-link class="nav-link" to='/' v-if="isLogged === true" v-on:click.native="logOut" >Sign out <span class="sr-only">(current)</span></router-link>
     
     </div>
   </nav>
@@ -111,25 +112,31 @@ export default {
   name: "AppNav",
         data(){
           return {
-            isLogged: this.isLoggedIn()
+            isLogged: this.isLoggedIn(),
+            isAdmin: this.isLoggedAdmin()
           }
         },
         created() {
             this.$bus.$on('logged', () => {this.isLogged = this.isLoggedIn()})
         },
         updated(){
-            this.setAuthenticatedUser()
+             this.setAuthenticatedUser()
         },
+
         methods: {
 
             logOut: function (e) {
                     this.$auth.destroyToken();
                     this.isLogged = this.isLoggedIn();
+                    this.isAdmin = this.isLoggedAdmin();
                     this.$router.push('/');
                     e.preventDefault();
             },
             isLoggedIn: function () {
               return this.$auth.isAuthenticated();
+            },
+            isLoggedAdmin: function(){
+              return this.$auth.isAuthenticatedAsAdmin();
             },
             setAuthenticatedUser: function () {
                  if(localStorage.getItem('token'))
@@ -138,8 +145,11 @@ export default {
                         .then(response => {
                             this.$auth.setAuthenticated(response.body)
                             //console.log(this.$auth.getAuthenticated().id_user)
-                        })
+                        }).then(
+                        () => {this.setAuthenticatedAsAdmin();}
+                        );
             },
+            
             setAuthenticatedAsAdmin: function(){
                 this.$http.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/isAdmin',
                     {
@@ -148,6 +158,8 @@ export default {
                     return response.body
                 }).then(response => {
                     this.$auth.setAdmin(response)
+                    this.isAdmin = this.isLoggedAdmin();
+
                 })
 
             },

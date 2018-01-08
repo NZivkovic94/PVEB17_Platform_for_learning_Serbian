@@ -80,13 +80,11 @@ export default {
 
                 this.$http.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/addUser', {
                     first_name: this.newUser.name,
-					last_name: this.newUser.lastname,
+					          last_name: this.newUser.lastname,
                     password: this.newUser.password,
                     email: this.newUser.email,
                     username: this.newUser.username,
-
-
-                });
+                }).then(response => {this.$router.push('/lesson');});
 
 			    /* This will stay for now */
 				this.users.push({

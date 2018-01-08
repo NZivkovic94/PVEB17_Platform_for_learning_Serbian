@@ -58,7 +58,6 @@ export default function (Vue) {
                 admin = true
             else
                 admin = false
-            console.log(admin)
         },
 
     }

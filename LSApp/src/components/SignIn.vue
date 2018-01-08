@@ -46,6 +46,8 @@
                     this.$bus.$emit('logged', 'User logged')
                     this.$router.push('/lesson')
 
+                }).catch(reason => {
+                    console.log(reason);
                 })
 
                 e.preventDefault();
