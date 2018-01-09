@@ -9,5 +9,6 @@ class Professor extends Model
     protected $table = 'professor';
     public $timestamps=false;
     protected $primaryKey = 'id_professor';
+    public $incrementing = false;
 
 }

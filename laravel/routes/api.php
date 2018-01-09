@@ -28,10 +28,15 @@ Route::get('/test', function() {
 });
 
 
-//This route will connect vue.js post method in singUp and addUser controller
+//Routes for registering and loging user
 Route::post("/addUser", 'addUser@store');
 Route::post("/signIn", 'logUser@signIn');
 
+//Routes for checking user role
 Route::post("/isAdmin", 'logUser@isAdmin');
 Route::post("/isProfessor", 'logUser@isProfessor');
 Route::post("/isStudent", 'logUser@isStudent');
+
+//Routes for working with lessons
+Route::post("/deleteLessonAsAdmin", 'workWithLesson@destroyAsAdmin');
+Route::post("/deleteLessonAsProfessor", 'workWithLesson@destroyAsProfessor');

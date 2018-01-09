@@ -9,5 +9,6 @@ class Student extends Model
     protected $table = 'student';
     public $timestamps=false;
     protected $primaryKey = 'id_student';
+    public $incrementing = false;
 
 }
