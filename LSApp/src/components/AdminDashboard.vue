@@ -25,7 +25,7 @@
             }
         },
         methods: {
-            addLesson: function(){
+            addLesson: function(e){
                 this.$http.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/createLessonAsAdmin', {
                     video_url : this.lesson.video_url
                 },
@@ -36,6 +36,7 @@
                 }).then(response => {
                     console.log(response)
                 })
+                e.preventDefault();
             }
         }
 
