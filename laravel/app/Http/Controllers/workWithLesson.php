@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\LessonModel;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
+use phpDocumentor\Reflection\Types\Integer;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
-class workWithLesson extends Controller
+class workWithLesson extends checkRole
 {
     /**
      * Display a listing of the resource.
@@ -39,9 +40,14 @@ class workWithLesson extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        LessonModel::create([
+            'id_author' => $id,
+            'video_url' => $request->get('video_url')
+        ]);
+
+        return "We added new lesson";
     }
 
     /**
@@ -78,6 +84,35 @@ class workWithLesson extends Controller
         //
     }
 
+    // Adding lesson as Admin
+    public function createAsAdmin(Request $request)
+    {
+        $pom = $this->checkRole($request, "administrator");
+
+        if($pom[0] == "true") {
+            workWithLesson::store($request, $pom[1]);
+        }
+        else {
+            return response()->json([
+                'isAdmin' => "Nisi admin"
+            ]);
+        }
+    }
+
+    // Adding lesson as Professor
+    public function createAsProfessor(Request $request)
+    {
+        $pom = $this->checkRole($request, "professor");
+
+        if($pom[0] == "true") {
+            workWithLesson::store($request, $pom[1]);
+        }
+        else {
+            return response()->json([
+                'isProfessor' => "Nisi profa"
+            ]);
+        }
+    }
 
     public function destroyAsAdmin(Request $request)
     {

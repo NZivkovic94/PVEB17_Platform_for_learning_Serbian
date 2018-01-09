@@ -11,4 +11,7 @@ class LessonModel extends Model
     protected $primaryKey = 'id_lesson';
     //public $incrementing = false;       uncomment if it its not autoincrementing
 
+    protected $fillable = [
+        'video_url', 'id_author'
+    ];
 }

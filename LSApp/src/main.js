@@ -17,7 +17,6 @@ Vue.use(Auth)
 
 Vue.config.productionTip = false
 
-
 Vue.prototype.$bus = new Vue();
 
 /*
@@ -75,6 +74,7 @@ Router.beforeEach(
         }
     }
 )
+
 
 /* eslint-disable no-new */
 new Vue({

@@ -35,8 +35,11 @@ Route::post("/signIn", 'logUser@signIn');
 //Routes for checking user role
 Route::post("/isAdmin", 'logUser@isAdmin');
 Route::post("/isProfessor", 'logUser@isProfessor');
-Route::post("/isStudent", 'logUser@isStudent');
+Route::post("/isStudent", 'logUser@isStudent');   // check if is user
 
 //Routes for working with lessons
 Route::post("/deleteLessonAsAdmin", 'workWithLesson@destroyAsAdmin');
 Route::post("/deleteLessonAsProfessor", 'workWithLesson@destroyAsProfessor');
+Route::post("/createLessonAsAdmin", 'workWithLesson@createAsAdmin');
+Route::post("/createLessonAsProfessor", 'workWithLesson@createAsProfessor');
+
