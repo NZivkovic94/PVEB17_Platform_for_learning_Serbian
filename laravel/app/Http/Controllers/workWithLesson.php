@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\LessonHasTag;
 use App\LessonModel;
 use App\Http\Controllers\Controller;
+use App\TagModel;
 use GuzzleHttp\Client;
 use phpDocumentor\Reflection\Types\Integer;
 use Psr\Http\Message\RequestInterface;
@@ -40,16 +42,33 @@ class workWithLesson extends checkRole
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request, $id, $user)
     {
+        //add lesson
         LessonModel::create([
             'id_author' => $id,
             'video_url' => $request->get('video_url')
         ]);
+        //get id_lesson from above insert into Lesson
+        $query_id_lesson = LessonModel::where('id_author', $id)->where('video_url', $request->get('video_url'))->value('id_lesson');
 
-        return "We added new lesson";
+        $id_role = "";
+        if($user == "professor")
+            $id_role = "id_professor";
+        else if($user == "administrator")
+            $id_role = "id_administrator";
+
+        //store every tag with same lesson and id_author into table lesson_has_tag
+        foreach ($request->get('selectedTags') as $id_tag)
+        {
+            LessonHasTag::create([
+                'id_lesson' => $query_id_lesson,
+                'id_tag' => $id_tag,
+                $id_role => $id
+            ]);
+        }
+
     }
-
     /**
      * Display the specified resource.
      *
@@ -90,7 +109,7 @@ class workWithLesson extends checkRole
         $pom = $this->checkRole($request, "administrator");
 
         if($pom[0] == "true") {
-            workWithLesson::store($request, $pom[1]);
+            workWithLesson::store($request, $pom[1], "administrator");
         }
         else {
             return response()->json([
@@ -105,7 +124,7 @@ class workWithLesson extends checkRole
         $pom = $this->checkRole($request, "professor");
 
         if($pom[0] == "true") {
-            workWithLesson::store($request, $pom[1]);
+            workWithLesson::store($request, $pom[1], "professor");
         }
         else {
             return response()->json([

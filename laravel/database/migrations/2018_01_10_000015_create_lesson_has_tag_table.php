@@ -21,7 +21,7 @@ class CreateLessonHasTagTable extends Migration
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->string('id_tag', 10);
-            $table->increments('id_lesson');
+            $table->integer('id_lesson');
             $table->integer('id_professor')->nullable();
             $table->integer('id_administrator')->nullable();
 
@@ -33,6 +33,7 @@ class CreateLessonHasTagTable extends Migration
 
             $table->index(["id_administrator"], 'fk_lesson_has_tag_administrator1_idx');
 
+            $table->primary(["id_tag", "id_lesson"], 'id_tag_PRIMARY');
 
             $table->foreign('id_tag', 'fk_tag_has_lesson_tag1_idx')
                 ->references('id_tag')->on('tag')

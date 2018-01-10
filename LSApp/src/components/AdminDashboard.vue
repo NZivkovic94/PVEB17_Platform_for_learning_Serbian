@@ -8,6 +8,17 @@
             <input type="text" id="video_pass"><br>
             <input type="radio" id="vimeo" value="vimeo" name="source">Vimeo<br>
             <input type="radio" id="youtube" value="youtube" name="source">Youtube<br>
+
+            <p>Pick tags you want to add:</p>
+            <form v-on:submit = "showAllTags">
+                <button type="submit" id="showAllTags" value="submit">Show tags</button><br>
+            </form>
+            <ul id="listTags">
+                <li v-for="tag in allTags">
+                    <input type="checkbox" id="tag" value="tag" v-on:click="addIfSelected(tag)">{{ tag }}
+                </li>
+            </ul>
+
             <button type="submit" id="submitLesson" value="submit">Submit</button><br>
         </form>
         <br/>
@@ -36,14 +47,16 @@
         data () {
             return {
                 title: "Admin Dashboard",
-                lesson : {}
-
+                lesson : {},
+                allTags: [],
+                selectedTags: []
             }
         },
         methods: {
             addLesson: function(e){
                 this.$http.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/createLessonAsAdmin', {
-                    video_url : this.lesson.video_url
+                    video_url : this.lesson.video_url,
+                    selectedTags : this.selectedTags
                 },
                 {
                     headers: {
@@ -61,7 +74,10 @@
                             'Authorization': 'Bearer ' + localStorage.getItem('token'),
                         }
                     }).then(response => {
-                    console.log(response)
+                        //console.log(response)
+                        this.allTags = response.body
+                        console.log(this.allTags)
+                        console.log(this.selectedTags)
                 })
                 e.preventDefault();
             },
@@ -90,7 +106,10 @@
                     console.log(response)
                 })
                 e.preventDefault();
-            }
+            },
+            addIfSelected: function (tag) {
+                this.selectedTags.push(tag)
+            },
         }
 
 
