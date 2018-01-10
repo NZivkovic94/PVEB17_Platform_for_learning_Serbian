@@ -39,7 +39,14 @@ Route::post("/isStudent", 'logUser@isStudent');   // check if is user
 
 //Routes for working with lessons
 Route::post("/deleteLessonAsAdmin", 'workWithLesson@destroyAsAdmin');
-Route::post("/deleteLessonAsProfessor", 'workWithLesson@destroyAsProfessor');
 Route::post("/createLessonAsAdmin", 'workWithLesson@createAsAdmin');
+
+Route::post("/deleteLessonAsProfessor", 'workWithLesson@destroyAsProfessor');
 Route::post("/createLessonAsProfessor", 'workWithLesson@createAsProfessor');
 
+//Routes for workings with tags
+Route::post("/createTagAsAdmin", 'workWithTag@createAsAdmin');
+Route::post("deleteTagAsAdmin", 'workWithTag@destroyAsAdmin');
+Route::get("/showTagsAsAdmin", 'workWithtag@showAsAdmin');
+
+Route::get("/showTagsAsProfessor", 'workWithtag@showAsProfessor');

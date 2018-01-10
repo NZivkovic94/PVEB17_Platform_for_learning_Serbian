@@ -10,6 +10,12 @@
             <input type="radio" id="youtube" value="youtube" name="source">Youtube<br>
             <button type="submit" id="submit" value="submit">Submit</button><br>
         </form>
+        <br/>
+        <br/>
+        <form v-on:submit = "showAllTags">
+            <label for="showTags">Console log all tags</label>
+            <button type="submit" id="showTags" value="submit">Show tags</button><br>
+        </form>
 
         <router-link to='/'>Back</router-link>
     </div>
@@ -39,7 +45,18 @@
                         //this.$router.push('/')
                 })
                 e.preventDefault();
-            }
+            },
+            showAllTags: function(e){
+                this.$http.get('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/showTagsAsProfessor',
+                    {
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                        }
+                    }).then(response => {
+                    console.log(response)
+                })
+                e.preventDefault();
+            },
         }
     }
 

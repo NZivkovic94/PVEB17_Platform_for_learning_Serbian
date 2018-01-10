@@ -2,16 +2,16 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-class CreateLanguageTable extends Migration
+class CreateTagTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $set_schema_table = 'language';
+    public $set_schema_table = 'tag';
     /**
      * Run the migrations.
-     * @table language
+     * @table tag
      *
      * @return void
      */
@@ -20,8 +20,9 @@ class CreateLanguageTable extends Migration
         if (Schema::hasTable($this->set_schema_table)) return;
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id_language');
-            $table->string('name', 45)->nullable();
+            $table->string('id_tag', 10);
+            $table->text('tag_content')->nullable();
+            $table->primary(["id_tag"], 'id_tag_PRIMARY');
         });
     }
 
