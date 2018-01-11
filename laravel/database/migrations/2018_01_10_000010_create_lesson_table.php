@@ -21,6 +21,8 @@ class CreateLessonTable extends Migration
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id_lesson');
+            $table->string('title', 100);
+            $table->text('description_lesson');
             $table->integer('level')->nullable();
             $table->date('date_created')->nullable();
             $table->integer('id_author');

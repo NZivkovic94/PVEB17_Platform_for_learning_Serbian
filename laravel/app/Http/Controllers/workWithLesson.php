@@ -47,10 +47,16 @@ class workWithLesson extends checkRole
         //add lesson
         LessonModel::create([
             'id_author' => $id,
-            'video_url' => $request->get('video_url')
+            'video_url' => $request->get('video_url'),
+            'title' => $request->get('title'),
+            'description_lesson' => $request->get('description_lesson')
         ]);
         //get id_lesson from above insert into Lesson
-        $query_id_lesson = LessonModel::where('id_author', $id)->where('video_url', $request->get('video_url'))->value('id_lesson');
+        $query_id_lesson = LessonModel::where('id_author', $id)
+                                     ->where('video_url', $request->get('video_url'))
+                                     ->where('title', $request->get('title'))
+                                     ->where('description_lesson', $request->get('description_lesson'))
+                                     ->value('id_lesson');
 
         $id_role = "";
         if($user == "professor")

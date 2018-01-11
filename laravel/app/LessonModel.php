@@ -12,6 +12,6 @@ class LessonModel extends Model
     //public $incrementing = false;       uncomment if it its not autoincrementing
 
     protected $fillable = [
-        'video_url', 'id_author'
+        'video_url', 'id_author' ,'title' , 'description_lesson'
     ];
 }

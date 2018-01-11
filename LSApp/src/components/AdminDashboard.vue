@@ -1,43 +1,82 @@
 <template>
     <div class = "adminDashboard">
         <h1>{{title}}</h1>
-        <p>If you can see this you are Admin</p>
 
+        <ul class="nav nav-tabs text_form" >
+            <li class="nav-item">
+                 <div class="nav-link" v-bind:class="{ active: isLessonSelected }" v-on:click="changeMode(1)">Lessons
+                 </div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-link" v-bind:class="{ active: !isLessonSelected }" v-on:click="changeMode(0)">Tags
+                </div>
+            </li>
+
+        </ul>
+
+        <div class="text_form" v-if="isLessonSelected === true">
+        <br>
         <form v-on:submit = "addLesson">
-            <input type="text" id="video_url"  name="video_url" v-model="lesson.video_url"><br>
-            <input type="text" id="video_pass"><br>
-            <input type="radio" id="vimeo" value="vimeo" name="source">Vimeo<br>
-            <input type="radio" id="youtube" value="youtube" name="source">Youtube<br>
+            
+            <div class="form-group">
+                    <label for="video_url">Video url</label>
+                    <input type="url" class="form-control" id="video_url" placeholder="Video url"
+                    name="video_url" v-model="lesson.video_url">
+            </div>
 
-            <p>Pick tags you want to add:</p>
+            <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Lesson title"
+                    v-model="lesson.title">
+            </div>
+
+            <div class="form-group">
+                    <label for="description">Desription</label>
+                    <textarea class="form-control" rows="5" id="description" name="description" placeholder="Enter lesson description" v-model="lesson.description"></textarea>
+            </div>
+
             <form v-on:submit = "showAllTags">
-                <button type="submit" id="showAllTags" value="submit">Show tags</button><br>
+                    <button class="btn btn-primary" type="submit" id="showTags" value="submit">Show tags</button><br>
             </form>
-            <ul id="listTags">
-                <li v-for="tag in allTags">
-                    <input type="checkbox" id="tag" value="tag" v-on:click="addIfSelected(tag)">{{ tag }}
-                </li>
-            </ul>
 
-            <button type="submit" id="submitLesson" value="submit">Submit</button><br>
+                <ul id="listTags">
+                    <li v-for="tag in allTags">
+                        <input type="checkbox" id="tag" value="tag" v-on:click="addIfSelected(tag)">{{ tag }}
+                    </li>
+                </ul>
+
+            <button class="btn btn-primary" type="submit" id="submit" value="submit">Submit</button><br/> 
         </form>
-        <br/>
-        <br/>
-        <form v-on:submit = "addTag">
+        </div>
+
+
+        <div class="text_form" v-if="isLessonSelected === false">
+        <br>
+        <form v-on:submit = "addTag" class="form-group">
             <label for="tag_id">Enter new tag</label>
-            <input type="text" id="tag_id"  name="tag_add" v-model="lesson.id_tag"><br>
-            <button type="submit" id="submitTag" value="submit">Add tag</button><br>
+            <input type="text" id="tag_id"  name="tag_add" v-model="lesson.id_tag" class="form-control"><br>
+            <button type="submit" id="submitTag" value="submit" class="btn btn-primary">Add tag</button><br>
         </form>
         <form v-on:submit = "deleteTag">
             <label for="tag_id_delete">Delete tag</label>
-            <input type="text" id="tag_id_delete"  name="tag_delete" v-model="lesson.id_tag_delete"><br>
-            <button type="submit" id="deleteTag" value="submit">Delete tag</button><br>
+            <input type="text" id="tag_id_delete"  name="tag_delete" v-model="lesson.id_tag_delete" 
+            class="form-control"><br>
+            <button type="submit" id="deleteTag" value="submit" class="btn btn-primary">Delete tag</button><br>
         </form>
+
+
+        
         <form v-on:submit = "showAllTags">
-            <label for="showTags">Console log all tags</label>
-            <button type="submit" id="showTags" value="submit">Show tags</button><br>
+            <br>
+            <button type="submit" id="showTags" value="submit" class="btn btn-primary">Show tags</button><br>
         </form>
+        </div>
+
+
         <router-link to='/'>Back</router-link>
+
+
+
     </div>
 </template>
 
@@ -49,14 +88,26 @@
                 title: "Admin Dashboard",
                 lesson : {},
                 allTags: [],
-                selectedTags: []
+                selectedTags: [],
+
+                isLessonSelected: true
             }
         },
         methods: {
+
+            changeMode: function(mode){
+                if(mode == 1)
+                    this.isLessonSelected = true;
+                else if(mode == 0){
+                    this.isLessonSelected = false;
+                }
+            },
             addLesson: function(e){
                 this.$http.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/createLessonAsAdmin', {
                     video_url : this.lesson.video_url,
-                    selectedTags : this.selectedTags
+                    selectedTags : this.selectedTags,
+                    title: this.lesson.title,
+                    description_lesson: this.lesson.description
                 },
                 {
                     headers: {
@@ -119,19 +170,35 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    h1, h2 {
-        font-weight: normal;
-    }
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-    a {
-        color: #42b983;
-    }
-</style>
+h1, h2 {
+    margin-top: 2%;
+    margin-bottom: 5%;
+   text-align: center;
+  font-weight: normal;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+  
+.text_form{
+    width: 50%;
+    height:100%;
+    clear: both;
+    margin:auto;
+}
 
+.text_form input {
+    width: 100%;
+    clear: both;
+    
+}
+
+</style>
