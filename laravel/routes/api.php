@@ -43,6 +43,9 @@ Route::post("/createLessonAsAdmin", 'workWithLesson@createAsAdmin');
 
 Route::post("/deleteLessonAsProfessor", 'workWithLesson@destroyAsProfessor');
 Route::post("/createLessonAsProfessor", 'workWithLesson@createAsProfessor');
+Route::get( "/getAllLessons", 'workWithLesson@showAll');
+
+
 
 //Routes for workings with tags
 Route::post("/createTagAsAdmin", 'workWithTag@createAsAdmin');

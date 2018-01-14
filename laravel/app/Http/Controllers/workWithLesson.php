@@ -85,6 +85,18 @@ class workWithLesson extends checkRole
     {
         //
     }
+    public function showAll(){
+        $lessons = LessonModel::all();
+        $lessons_name = [];
+
+        foreach ($lessons as $lesson) {
+            array_push($lessons_name, $lesson);
+        }
+
+        $json_response = json_encode($lessons_name);
+
+        return response($json_response);
+    }
 
     /**
      * Show the form for editing the specified resource.
