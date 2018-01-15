@@ -1,5 +1,29 @@
 # PVEB17_Platform_for_learning_Serbian
 Web platform which will enable learning Serbian language through a number of lessons which are all theme connected. This platform is meant for young people in foreign countries which would like to keep in touch with both culture and language from their homeland. 
+## How to use sql tests
+Awesome data for testing, and showing!
+
+
+``` bash
+# deleta all data ( drop everyting and have a clean database ) 
+  php artisan key:generate     #restart apache  
+  php artisan migrate          #repeat this until you have no errors and you get "nothing to migrate"
+  php artisan passport:install  
+
+# run the app, go to SignUp and make 3 users
+  1st is going to be admin
+  2nd is going to be proffesor 
+  3rd is going to be a student
+  but don't change the database!
+
+# go to phpMyAdmin
+  click on the database
+  click on SQL
+  copy everyting from test_data.sql and click Go.
+
+```
+
+
 
 ## Build Setup
 
@@ -25,6 +49,11 @@ npm test
 # add new packages with 
 npm install package_name --save
 ```
+
+
+
+
+
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
