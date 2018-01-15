@@ -1,35 +1,22 @@
 <template>
     <div class = "lesson container">
-      <!-- Page Heading -->
-      <h1 class="my-4">{{title}} </h1>
-
-    <!--
-     <ul class="nav flex-column">
-      <li class="nav-item" v-for="(lesson, index) in this.lessons">
-          <div class="nav-link active" v-on:click="changeLesson(index)" >{{lesson.title}}</div>
-      </li>
-      </ul>
-    -->
-    <div class="container">
 
       <div class="row">
-
-        <!-- Blog Entries Column -->
         <div class="col-md-8">
 
-          <h1 class="my-4">{{activeLesson.title}}
-            <small>lecture</small>
+          <h1 class="my-4">Lessons
+            <small>{{activeLesson.title}}</small>
           </h1>
 
-          <!-- Blog Post -->
+          <!-- Lessons -->
           <div class="card mb-4">
             <div id="videoLesson" class="embed-responsive embed-responsive-4by3">
             <iframe class="embed-responsive-item" :src="activeLesson.video_url" 
-            allowfullscreen></iframe></div>
+            allowfullscreen ></iframe></div>
             <div class="card-body">
               <h2 class="card-title">{{activeLesson.title}}</h2>
               <p class="card-text">{{activeLesson.description_lesson}}</p>
-              <a href="#" class="btn btn-primary">Read More &rarr;</a>
+              <button class="btn btn-primary">Read More &rarr;</button>
             </div>
             <div class="card-footer text-muted">
               Posted on January 1, 2017 by
@@ -41,6 +28,7 @@
         </div>
 
         <div class="col-md-4">
+          
           <!-- Search Widget -->
           <div class="card my-4">
             <h5 class="card-header">Search</h5>
@@ -54,7 +42,7 @@
             </div>
           </div>
 
-          <!-- Lessons Widget -->
+          <!-- Lessons Sidebar -->
           <div class="card my-4">
             <h5 class="card-header">Lessons</h5>
             <div class="nav flex-column list-group" role="tablist">
@@ -74,11 +62,6 @@
       <!-- /.row -->
 
     </div>
-    </div>
-
-
-
-
 </template>
 
 <script>
@@ -121,28 +104,8 @@
 }
 
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-   /* h1, h2 {
-        font-weight: normal;
-    }
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-    a {
-        color: #42b983;
-    },
-    #videoLesson {
-      width: 75%;
-      height: 75%;
-    }
-*/
+    
   body {
   padding-top: 54px;
   }
