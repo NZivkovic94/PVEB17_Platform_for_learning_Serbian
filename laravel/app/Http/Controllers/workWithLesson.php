@@ -88,14 +88,22 @@ class workWithLesson extends checkRole
     public function showAll(){
         $lessons = LessonModel::all();
         $lessons_name = [];
+        $tags_array = [];
+
 
         foreach ($lessons as $lesson) {
+            $id_lesson = intval($lesson['id_lesson']);
+            $tags = LessonHasTag::where('id_lesson', $id_lesson)->get();
+            foreach ($tags as $tag)
+                array_push($tags_array, $tag["id_tag"]);
+            $lesson["tags_array"] = $tags_array;
             array_push($lessons_name, $lesson);
-        }
+            }
+
 
         $json_response = json_encode($lessons_name);
-
         return response($json_response);
+
     }
 
 
