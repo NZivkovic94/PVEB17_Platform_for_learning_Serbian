@@ -43,7 +43,9 @@ Route::post("/createLessonAsAdmin", 'workWithLesson@createAsAdmin');
 
 //Route::post("/deleteLessonAsProfessor", 'workWithLesson@destroyAsProfessor');
 Route::post("/createLessonAsProfessor", 'workWithLesson@createAsProfessor');
+
 Route::get( "/getAllLessons", 'workWithLesson@showAll');
+Route::post("/findLessonsByTag", 'workWithLesson@showByTag');  //example: ["id_tag" => "ai"]
 
 
 

@@ -85,6 +85,36 @@ class workWithLesson extends checkRole
     {
         //
     }
+
+    public function showByTag(Request $request){
+
+        $lesson_ids = LessonHasTag::where("id_tag", $request->get("id_tag"))->get();
+        $lessons_with_tag_ids_array = [];
+
+        foreach ($lesson_ids as $lesson_id)
+            array_push($lessons_with_tag_ids_array, $lesson_id["id_lesson"]);
+
+        $lessons = [];
+
+        foreach ($lessons_with_tag_ids_array as $lessons_with_tag_id)
+            array_push($lessons, LessonModel::find($lessons_with_tag_id));
+
+        $lessons_name = [];
+        $tags_array = [];
+
+        foreach ($lessons as $lesson) {
+            $id_lesson = intval($lesson['id_lesson']);
+            $tags = LessonHasTag::where('id_lesson', $id_lesson)->get();
+            foreach ($tags as $tag)
+                array_push($tags_array, $tag["id_tag"]);
+            $lesson["tags_array"] = $tags_array;
+            array_push($lessons_name, $lesson);
+        }
+
+        $json_response = json_encode($lessons_name);
+        return response($json_response);
+    }
+
     public function showAll(){
         $lessons = LessonModel::all();
         $lessons_name = [];

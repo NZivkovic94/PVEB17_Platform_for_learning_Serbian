@@ -5,8 +5,7 @@ Awesome data for testing, and showing!
 
 
 ``` bash
-# deleta all data ( drop everyting and have a clean database ) 
-  php artisan key:generate     #restart apache  
+# deleta all data ( drop everyting and have a clean database )   
   php artisan migrate          #repeat this until you have no errors and you get "nothing to migrate"
   php artisan passport:install  
 
@@ -64,7 +63,6 @@ composer install
 cp .env.example .env  
 #configure your .env file  
 php artisan key:generate  
-#restart apache  
 php artisan migrate #repeat this until you have no errors and you get "nothing to migrate" message *up to 25 times :( *
 php artisan passport:install  
 ```
