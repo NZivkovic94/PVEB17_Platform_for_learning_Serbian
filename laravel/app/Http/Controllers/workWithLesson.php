@@ -98,12 +98,15 @@ class workWithLesson extends checkRole
         return response($json_response);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+    public function destroy(Request $request)
+    {
+        $lesson = LessonModel::find($request->get('id_lesson'));
+        $lesson->delete();
+
+    }
+
+
     public function edit($id)
     {
         //
@@ -153,76 +156,26 @@ class workWithLesson extends checkRole
 
     public function destroyAsAdmin(Request $request)
     {
-        $clientUser = new Client();
-        $which_user_is_this = $clientUser->request('GET', 'http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/user', [
-            'headers' => [
-                'Authorization' => $request->header('Authorization')
-            ]
-        ]);
+        $pom = $this->checkRole($request, "administrator");
 
-        $response_body = $which_user_is_this->getBody();
-        $string_response_body = (string) $response_body;
-        $response_array = explode(",", $string_response_body);
-        $id_user_array = explode(":", $response_array[0]);
-        $id_user_int = intval($id_user_array[1]);
-
-        $idObject = [
-            'id_administrator' => $id_user_int,
-        ];
-
-        $clientRole = new Client();
-        $what_role_this_user_has = $clientRole->request('POST', 'http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/isAdmin', [
-            'json' => $idObject
-        ]);
-
-        $role_bool_body = $what_role_this_user_has->getBody();
-        $string_role_bool_body = (string) $role_bool_body;
-
-        if( $string_role_bool_body == "true") {
-            /*
-             * Here we delete lesson if we are admin and we return response to Vue.js so
-             * user will know if lesson is deleted
-             */
+        if($pom[0] == "true") {
+            workWithLesson::destroy($request, $pom[1], "administrator");
         }
         else {
             return response()->json([
                 'isAdmin' => "Nisi admin"
             ]);
         }
+
+
     }
 
     public function destroyAsProfessor(Request $request)
     {
-        $clientUser = new Client();
-        $which_user_is_this = $clientUser->request('GET', 'http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/user', [
-            'headers' => [
-                'Authorization' => $request->header('Authorization')
-            ]
-        ]);
+        $pom = $this->checkRole($request, "professor");
 
-        $response_body = $which_user_is_this->getBody();
-        $string_response_body = (string) $response_body;
-        $response_array = explode(",", $string_response_body);
-        $id_user_array = explode(":", $response_array[0]);
-        $id_user_int = intval($id_user_array[1]);
-
-        $idObject = [
-            'id_professor' => $id_user_int,
-        ];
-
-        $clientRole = new Client();
-        $what_role_this_user_has = $clientRole->request('POST', 'http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/isProfessor', [
-            'json' => $idObject
-        ]);
-
-        $role_bool_body = $what_role_this_user_has->getBody();
-        $string_role_bool_body = (string) $role_bool_body;
-
-        if( $string_role_bool_body == "true") {
-            /*
-            * Here we delete lesson if we are professor and we return response to Vue.js so
-            * user will know if lesson is deleted
-            */
+        if($pom[0] == "true") {
+            workWithLesson::destroy($request, $pom[1], "professor");
         }
         else {
             return response()->json([

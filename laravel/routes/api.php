@@ -41,7 +41,7 @@ Route::post("/isStudent", 'logUser@isStudent');   // check if is user
 Route::post("/deleteLessonAsAdmin", 'workWithLesson@destroyAsAdmin');
 Route::post("/createLessonAsAdmin", 'workWithLesson@createAsAdmin');
 
-Route::post("/deleteLessonAsProfessor", 'workWithLesson@destroyAsProfessor');
+//Route::post("/deleteLessonAsProfessor", 'workWithLesson@destroyAsProfessor');
 Route::post("/createLessonAsProfessor", 'workWithLesson@createAsProfessor');
 Route::get( "/getAllLessons", 'workWithLesson@showAll');
 

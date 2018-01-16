@@ -47,6 +47,20 @@
 
             <button class="btn btn-primary" type="submit" id="submit" value="submit">Submit</button><br/> 
         </form>
+
+        <br/>
+        <br/>
+
+        <div>
+        <form v-on:submit = "deleteLesson">
+            <label for="lesson_id_delete">Enter ID of a lesson you want to delete</label>
+            <input type="number" id="lesson_id_delete"  name="lesson_delete" v-model="lesson.id_lesson_delete"
+                   class="form-control"><br>
+            <button class="btn btn-primary" type="submit" id="deleteLesson" value="submit">Delete lesson</button><br>
+        </form>
+        </div>
+
+
         </div>
 
 
@@ -114,6 +128,19 @@
                         'Authorization': 'Bearer ' + localStorage.getItem('token'),
                     }
                 }).then(response => {
+                    console.log(response)
+                })
+                e.preventDefault();
+            },
+            deleteLesson: function(e){
+                this.$http.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/deleteLessonAsAdmin', {
+                        id_lesson : this.lesson.id_lesson_delete
+                    },
+                    {
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                        }
+                    }).then(response => {
                     console.log(response)
                 })
                 e.preventDefault();

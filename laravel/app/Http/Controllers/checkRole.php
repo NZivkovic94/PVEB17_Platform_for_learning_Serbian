@@ -26,10 +26,13 @@ class checkRole extends Controller
         ]);
 
         $response_body = $which_user_is_this->getBody();
-        $string_response_body = (string) $response_body;
+        $string_response_body = (string)$response_body;
         $response_array = explode(",", $string_response_body);
-        $id_user_array = explode(":", $response_array[0]);
-        $id_user_int = intval($id_user_array[1]);
+        foreach ($response_array as $response_array_element) {
+            $response_array_element_array = explode(":", $response_array_element);
+            if (strpos($response_array_element_array[0], 'id_user') !== false)
+                $id_user_int = intval($response_array_element_array[1]);
+        }
 
 
 
