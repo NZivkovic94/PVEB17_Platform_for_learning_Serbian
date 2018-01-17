@@ -7,23 +7,32 @@
           <h1 class="my-4">Lessons
             <small>{{activeLesson.title}}</small>
           </h1>
+  
 
           <!-- Lessons -->
           <div class="card mb-4">
-            <div id="videoLesson" class="embed-responsive embed-responsive-4by3">
+            <div id="videoLesson" class="embed-responsive embed-responsive-16by9">
             <iframe class="embed-responsive-item" :src="activeLesson.video_url" 
             allowfullscreen ></iframe></div>
             <div class="card-body">
               <h2 class="card-title">{{activeLesson.title}}</h2>
               <p class="card-text">{{activeLesson.description_lesson}}</p>
-              <button class="btn btn-primary">Read More &rarr;</button>
+              
+              <span v-for="tag in activeLesson.tags_array">
+                <a class="badge badge-primary"
+                      v-on:click="findLessonsbyTag(tag)"
+                      href="#"> 
+                    {{tag}} &rarr;</a>
+                    &nbsp;
+
+              </span>
             </div>
             <div class="card-footer text-muted">
               Posted on January 1, 2017 by
               {{activeLesson.id_author}}
             </div>
-          </div>
 
+          </div>
 
         </div>
 
@@ -33,13 +42,16 @@
           <div class="card my-4">
             <h5 class="card-header">Search</h5>
             <div class="card-body">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
+              <form class="input-group" v-on:submit="findLessonsbyTag(search)">
+                <input type="text" class="form-control" placeholder="Search for..." v-model="search">
                 <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button">Go!</button>
+                  <button class="btn btn-secondary" type="submit">Go!</button>
                 </span>
-              </div>
+              </form>
+              <br>
+              <button type="button" class="btn btn-primary" v-on:click="showAllLessons()">Clear filter</button>
             </div>
+
           </div>
 
           <!-- Lessons Sidebar -->
@@ -49,10 +61,8 @@
               <div class="list-group-item list-group-item-action"
                   v-for="(lesson, index) in this.lessons" 
                   v-on:click="changeLesson(index)"
-                  role="tab"
-                  data-toggle="list">
+                  role="tab">
                   {{lesson.title}}
-             
               </div>
             </div>
           </div>    
@@ -60,8 +70,11 @@
 
       </div>
       <!-- /.row -->
-
     </div>
+
+
+
+
 </template>
 
 <script>
@@ -73,6 +86,7 @@
         data () {
             return {
                 title: "Lessons",
+                search: "",
                 lessons: [],
                 activeLesson: {}
             }
@@ -97,8 +111,28 @@
                     }).then(response => {
                         this.lessons = response.body;
                         this.activeLesson = this.lessons[0];
+                        this.search = "";
                 })
-            }
+            },
+          findLessonsbyTag: function(tag_name){
+            this.$http.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/findLessonsByTag', {
+                        id_tag : tag_name.toLowerCase().trim()
+                    },
+                    {
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                        }
+                    }).then(response =>{
+                        console.log(response.body);
+                        if(response.body.length > 0){
+                          this.lessons = response.body;
+                          this.activeLesson = this.lessons[0]; 
+                        }
+                        else{
+                          this.showAllLessons();
+                        }
+                    });
+          }
 
           }
 }

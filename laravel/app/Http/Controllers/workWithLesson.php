@@ -100,9 +100,9 @@ class workWithLesson extends checkRole
             array_push($lessons, LessonModel::find($lessons_with_tag_id));
 
         $lessons_name = [];
-        $tags_array = [];
 
         foreach ($lessons as $lesson) {
+            $tags_array = [];
             $id_lesson = intval($lesson['id_lesson']);
             $tags = LessonHasTag::where('id_lesson', $id_lesson)->get();
             foreach ($tags as $tag)
@@ -118,10 +118,11 @@ class workWithLesson extends checkRole
     public function showAll(){
         $lessons = LessonModel::all();
         $lessons_name = [];
-        $tags_array = [];
 
 
         foreach ($lessons as $lesson) {
+            $tags_array = [];
+
             $id_lesson = intval($lesson['id_lesson']);
             $tags = LessonHasTag::where('id_lesson', $id_lesson)->get();
             foreach ($tags as $tag)
