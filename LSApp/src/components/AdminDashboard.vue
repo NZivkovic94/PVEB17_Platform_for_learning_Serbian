@@ -19,7 +19,7 @@
             </li>
             <li class="nav-item">
                 <div class="nav-link" v-bind:class="{ active: mode == 'tag' }" 
-                v-on:click="changeMode('tag'); showAllTags();">
+                v-on:click="changeMode('tag');  getAllLessons(); showAllTags();">
                 Tags
                 </div>
             </li>
@@ -75,11 +75,12 @@
                     <label for="description">Desription</label>
                     <textarea class="form-control" rows="5" id="description" name="description" placeholder="Enter lesson description" v-model="lesson.description"></textarea>
                 </div>
-                <ul id="listTags">
-                    <li v-for="tag in allTags">
-                        <input type="checkbox" id="tag" value="tag" v-on:click="addIfSelected(tag)">{{ tag }}
-                    </li>
-                </ul>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons" >
+                    <label class="btn btn-secondary" v-for="tag in allTags" v-on:click="addIfSelected(tag)">
+                         <input type="checkbox" id="tag" value="tag">{{ tag }}
+                    </label>
+                </div>
+               <br>
 
                 <button class="btn btn-primary" type="submit" id="submit" value="submit">Submit</button><br/> 
                 </form>
@@ -190,17 +191,13 @@
                 e.preventDefault();
             },
             showAllTags: function(){
-                console.log("caocao");
                 this.$http.get('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/showTagsAsAdmin',
                     {
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem('token'),
                         }
                     }).then(response => {
-                        console.log(response);
                         this.allTags = response.body
-                        console.log(this.allTags)
-                        console.log(this.selectedTags)
                 })
                 
             },
@@ -226,13 +223,19 @@
                             'Authorization': 'Bearer ' + localStorage.getItem('token'),
                         }
                     }).then(response => {
-                    console.log(response)
                     }).then(()=>{ this.showAllTags(); })
 
                 e.preventDefault();
             },
             addIfSelected: function (tag) {
-                this.selectedTags.push(tag)
+                let index = this.selectedTags.indexOf(tag);
+                if(index > -1 ){
+                    this.selectedTags.splice(index,1);
+                }
+                else{
+                     this.selectedTags.push(tag)
+                }
+                console.log(this.selectedTags);
             },
             getAllLessons: function(){
                 this.$http.get('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/getAllLessons',
@@ -260,7 +263,6 @@
           
           popularity: function(tag){
             let total = this.lessons.length;
-            console.log(total);
             let counter = 0;
             for (let i = 0; i < this.lessons.length; i++) {
                 if(this.lessons[i].tags_array.includes(tag)){
@@ -311,5 +313,63 @@ a {
     clear: both;
     
 }
+ /* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+} 
 
 </style>
