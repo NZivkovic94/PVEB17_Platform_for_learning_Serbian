@@ -100,6 +100,7 @@ class workWithTag extends checkRole
     {
         $tag = TagModel::find($request->get('id_tag'));
         $tag->delete();
+        //$tag_lesson = LessonHasTag::where('id_tag', $request->get('id_tag')->delete();
 
     }
 

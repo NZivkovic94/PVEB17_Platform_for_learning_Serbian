@@ -6,47 +6,28 @@
 
         <ul class="nav nav-tabs text_form" >
             <li class="nav-item">
-                 <div class="nav-link" v-bind:class="{ active: mode == 'statistics' }" v-on:click="changeMode('statistics')">Statistics
+                 <div class="nav-link" v-bind:class="{ active: mode == 'statistics' }" 
+                 v-on:click="changeMode('statistics');
+                            getAllLessons();">
+                 Statistics
                  </div>
             </li>
             <li class="nav-item">
-                 <div class="nav-link" v-bind:class="{ active: mode == 'lesson'  }" v-on:click="changeMode('lesson'); getAllLessons();">Lessons
+                 <div class="nav-link" v-bind:class="{ active: mode == 'lesson'  }" 
+                 v-on:click="changeMode('lesson')">Lessons
                  </div>
             </li>
             <li class="nav-item">
-                <div class="nav-link" v-bind:class="{ active: mode == 'tag' }" v-on:click="changeMode('tag')">Tags
+                <div class="nav-link" v-bind:class="{ active: mode == 'tag' }" 
+                v-on:click="changeMode('tag'); showAllTags();">
+                Tags
                 </div>
             </li>
 
         </ul>
 
-        <!-- Initial main part -->
-
+        <!-- Lesson statistics main part -->
          <div role="main" class="col-sm-9 ml-sm-auto col-md-12 pt-3" v-if="mode === 'statistics'">
-            <h2>Statistics</h2>
-<!--          <section class="row text-center placeholders">
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <div class="text-muted">Something else</div>
-            </div>
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-          </section>
--->
           <h2>Lesson statistics</h2>
           <div class="table-responsive">
             <table class="table table-striped">
@@ -74,8 +55,8 @@
         <!-- Lessons tab -->
         <div class="text_form row" v-if="mode === 'lesson'">
             
-             <!-- Add Lessons tab -->
-            <div class=" col-md-4 pt-3">
+            <!-- Add Lessons tab -->
+            <div class=" col-md-6 pt-3">
                 <form v-on:submit = "addLesson">
                 <h2>Add lesson</h2>
                 <div class="form-group">
@@ -94,10 +75,6 @@
                     <label for="description">Desription</label>
                     <textarea class="form-control" rows="5" id="description" name="description" placeholder="Enter lesson description" v-model="lesson.description"></textarea>
                 </div>
-                <form v-on:submit = "showAllTags">
-                    <button class="btn btn-primary" type="submit" id="showTags" value="submit">Show tags</button><br>
-                </form>
-
                 <ul id="listTags">
                     <li v-for="tag in allTags">
                         <input type="checkbox" id="tag" value="tag" v-on:click="addIfSelected(tag)">{{ tag }}
@@ -109,7 +86,7 @@
             </div>
 
             <!-- Delete Lessons tab -->
-            <div class="col-md-4 pt-3">
+            <div class="col-md-6 pt-3">
             
                 <form v-on:submit = "deleteLesson">
                     <h2>Delete lesson</h2>
@@ -121,28 +98,42 @@
             </div>
         </div>
 
-
+        <!-- Tag statistics -->
         <div class="text_form" v-if="mode === 'tag'">
-        <br>
-        <form v-on:submit = "addTag" class="form-group">
-            <label for="tag_id">Enter new tag</label>
-            <input type="text" id="tag_id"  name="tag_add" v-model="lesson.id_tag" class="form-control"><br>
-            <button type="submit" id="submitTag" value="submit" class="btn btn-primary">Add tag</button><br>
-        </form>
-        <form v-on:submit = "deleteTag">
-            <label for="tag_id_delete">Delete tag</label>
-            <input type="text" id="tag_id_delete"  name="tag_delete" v-model="lesson.id_tag_delete" 
-            class="form-control"><br>
-            <button type="submit" id="deleteTag" value="submit" class="btn btn-primary">Delete tag</button><br>
-        </form>
-
-
+            <h2>Tag</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <form v-on:submit = "addTag" class="form-group">
+                        <label for="tag_id">Enter new tag</label>
+                        <input type="text" id="tag_id"  name="tag_add" v-model="lesson.id_tag" class="form-control"><br>
+                        <button type="submit" id="submitTag" value="submit" class="btn btn-primary">Add tag</button><br>
+                    </form>
+                    <form v-on:submit = "deleteTag">
+                        <label for="tag_id_delete">Delete tag</label>
+                        <input type="text" id="tag_id_delete"  name="tag_delete" v-model="lesson.id_tag_delete" class="form-control"><br>
+                        <button type="submit" id="deleteTag" value="submit" class="btn btn-primary" >Delete tag</button>
+                        <br>
+                    </form>
         
-        <form v-on:submit = "showAllTags">
-            <br>
-            <button type="submit" id="showTags" value="submit" class="btn btn-primary">Show tags</button><br>
-        </form>
-        </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div v-for="tag in allTags">
+                        {{tag}}
+                        <div class="progress">
+                        <div class="progress-bar" role="progressbar" 
+                        v-bind:style="{ width: popularity(tag) + '%' }" 
+                        aria-valuenow="25" 
+                        aria-valuemin="0" 
+                        aria-valuemax="100">
+                        {{Math.round(popularity(tag) * 100) / 100}}
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
 
 
 
@@ -153,7 +144,8 @@
     export default {
         name: "adminDashboard",
         created() {
-            this.lessons = this.getAllLessons();
+            this.getAllLessons();
+            this.showAllTags();
         },
         data () {
             return {
@@ -197,19 +189,20 @@
                 })
                 e.preventDefault();
             },
-            showAllTags: function(e){
+            showAllTags: function(){
+                console.log("caocao");
                 this.$http.get('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/showTagsAsAdmin',
                     {
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem('token'),
                         }
                     }).then(response => {
-                        //console.log(response)
+                        console.log(response);
                         this.allTags = response.body
                         console.log(this.allTags)
                         console.log(this.selectedTags)
                 })
-                e.preventDefault();
+                
             },
             addTag: function(e){
                 this.$http.post('http://localhost/PVEB17_Platform_for_learning_Serbian/laravel/public/api/createTagAsAdmin', {
@@ -220,8 +213,8 @@
                             'Authorization': 'Bearer ' + localStorage.getItem('token'),
                         }
                     }).then(response => {
-                    console.log(response)
-                })
+                }).then(()=>{ this.showAllTags(); })
+
                 e.preventDefault();
             },
             deleteTag: function(e){
@@ -234,7 +227,8 @@
                         }
                     }).then(response => {
                     console.log(response)
-                })
+                    }).then(()=>{ this.showAllTags(); })
+
                 e.preventDefault();
             },
             addIfSelected: function (tag) {
@@ -263,11 +257,21 @@
             }
             return result;
           },
-          popularity: function(){
-            for(let i = 0 ; i < this.lessons.length; i++){
-                
+          
+          popularity: function(tag){
+            let total = this.lessons.length;
+            console.log(total);
+            let counter = 0;
+            for (let i = 0; i < this.lessons.length; i++) {
+                if(this.lessons[i].tags_array.includes(tag)){
+                    counter++;
+                }
             }
+            return counter/total * 100.0;
+
           }
+          
+
         }
 
 
