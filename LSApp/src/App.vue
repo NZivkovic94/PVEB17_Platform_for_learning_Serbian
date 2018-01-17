@@ -7,11 +7,10 @@
       <router-view></router-view>
     </main>
 
-    <!--
-    <footer class="footer">
+    
+      <footer>
        <app-footer></app-footer>
-    </footer>
-  -->
+     </footer>
 
 
   </div>
@@ -30,6 +29,13 @@ export default {
 
 #app {
   height: 100%;
+}
+html {
+  position: relative;
+  height: 100%;
+}
+body {
+  margin-bottom: 60px;
 }
 
 </style>
