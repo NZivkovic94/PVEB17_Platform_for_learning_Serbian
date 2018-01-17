@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\TagModel;
+use App\LessonHasTag;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\DocBlock\Tag;
 

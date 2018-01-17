@@ -100,6 +100,7 @@ class workWithLesson extends checkRole
             array_push($lessons, LessonModel::find($lessons_with_tag_id));
 
         $lessons_name = [];
+        $tags_array = [];
 
         foreach ($lessons as $lesson) {
             $tags_array = [];
@@ -142,6 +143,7 @@ class workWithLesson extends checkRole
     {
         $lesson = LessonModel::find($request->get('id_lesson'));
         $lesson->delete();
+        $tags = LessonHasTag::where('id_lesson', $request->get('id_lesson'))->delete();
 
     }
 
