@@ -14,7 +14,7 @@ composer install
 cp .env.example .env  
 configure your .env file
 php artisan key:generate  
-php artisan migrate #repeat this until you have no errors and you get "nothing to migrate" message *up to 25 times :( *
+for i in {1..25}; do php artisan migrate; done
 php artisan passport:install  
 ```
 
@@ -40,7 +40,7 @@ Awesome data for initializing your database so this app looks great.
 
 ``` bash
 # deleta all data ( drop everyting and have a clean database )   
-  php artisan migrate    	#repeat until "nothing to merge"
+  for i in {1..25}; do php artisan migrate; done
   php artisan passport:install  
 
 # run the app, go to SignUp and make 3 users
