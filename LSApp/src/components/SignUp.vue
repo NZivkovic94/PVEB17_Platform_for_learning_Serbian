@@ -94,6 +94,11 @@ export default {
 					password: this.newUser.password,
 
 				})
+                this.newUser.name = ""
+                this.newUser.lastname = ""
+                this.newUser.password = ""
+                this.newUser.email = ""
+                this.newUser.username = ""
 				e.preventDefault();
 			},
 			deleteUser: function(user){

@@ -15,7 +15,9 @@
             v-model="user.password" name= "password">
         </div>
         <button type="submit" value="Sign in" class="btn btn-primary">Submit</button>
-        
+             <div v-if="isLogged === false" id="invalidSignIn">
+                Incorrect username or password.
+             </div>
         </form>
 
         </div>
@@ -47,6 +49,9 @@
                     this.$router.push('/lesson')
 
                 }).catch(reason => {
+                    this.user.email="";
+                    this.user.password="";
+                    this.isLogged = false;
                     console.log(reason);
                 })
 
@@ -54,7 +59,6 @@
             }
         }
     }
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -85,5 +89,9 @@
         width: 100%;
         clear: both;
 
+    }
+
+    #invalidSignIn {
+        color: red;
     }
 </style>

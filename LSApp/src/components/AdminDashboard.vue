@@ -176,6 +176,10 @@
                     }
                 }).then(response => {
                 })
+                this.lesson.video_url=""
+                this.lesson.selectedTags=""
+                this.lesson.title=""
+                this.lesson.description=""
                 e.preventDefault();
             },
             deleteLesson: function(e){
@@ -188,6 +192,7 @@
                         }
                     }).then(response => {
                 })
+                this.lesson.id_lesson_delete=""
                 e.preventDefault();
             },
             showAllTags: function(){
@@ -211,7 +216,7 @@
                         }
                     }).then(response => {
                 }).then(()=>{ this.showAllTags(); })
-
+                this.lesson.id_tag=""
                 e.preventDefault();
             },
             deleteTag: function(e){
@@ -224,7 +229,7 @@
                         }
                     }).then(response => {
                     }).then(()=>{ this.showAllTags(); })
-
+                this.lesson.id_tag_delete=""
                 e.preventDefault();
             },
             addIfSelected: function (tag) {
