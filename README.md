@@ -33,7 +33,7 @@ npm run build		# build for production with minification
 ```
 
 ## :tv: Demo
-![demo](https://dummyimage.com/600x400/000000/fff)
+![demo](https://github.com/NZivkovic94/PVEB17_Platform_for_learning_Serbian/blob/master/assets/Demo.gif)
 
 ## :chart_with_upwards_trend: Database initialization
 Awesome data for initializing your database so this app looks great.
