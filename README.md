@@ -21,7 +21,7 @@ php artisan passport:install
 ### Vue.js build
 ``` bash
 npm install						# install dependencies
-npm install package_name --save	# add new packages 
+npm install PACKAGE_NAME --save	# add new package to dependencies list (you should repeat npm install after that)
 ```
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
