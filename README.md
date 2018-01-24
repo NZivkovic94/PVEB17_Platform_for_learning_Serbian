@@ -56,6 +56,10 @@ Awesome data for initializing your database so this app looks great.
 
 ```
 
+## :floppy_disk: Database schema
+![schema](assets/database_schema.png)
+
+
 ## :wrench: Built using
 This application is built using Javascript framework - Vue.js and PHP framework - Laravel.
 * [Vue.js](https://vuejs.org/) -  frontend
